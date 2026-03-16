@@ -8,50 +8,27 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Inter", "system-ui", "sans-serif"],
+                sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
                 mono: ["JetBrains Mono", "monospace"],
             },
             colors: {
-                navy: {
-                    950: "#020817",
-                    900: "#040f24",
-                    800: "#071733",
-                    700: "#0a2040",
+                violet: {
+                    400: "#a78bfa",
+                    500: "#8b5cf6",
+                    600: "#7c3aed",
                 },
-                electric: {
-                    400: "#38bdf8",
-                    500: "#0ea5e9",
-                    600: "#0284c7",
+                cyan: {
+                    400: "#22d3ee",
+                    500: "#06b6d4",
                 },
-                neon: {
-                    blue: "#00d4ff",
-                    cyan: "#00f5d4",
-                    purple: "#7c3aed",
+                lime: {
+                    400: "#a3e635",
+                    500: "#84cc16",
                 },
             },
-            animation: {
-                "float": "float 6s ease-in-out infinite",
-                "pulse-slow": "pulse 4s ease-in-out infinite",
-                "glow": "glow 2s ease-in-out infinite alternate",
-                "spin-slow": "spin 20s linear infinite",
-                "counter": "counter 2s ease-out forwards",
-            },
-            keyframes: {
-                float: {
-                    "0%, 100%": { transform: "translateY(0px)" },
-                    "50%": { transform: "translateY(-20px)" },
-                },
-                glow: {
-                    "0%": { boxShadow: "0 0 5px #00d4ff44, 0 0 20px #00d4ff22" },
-                    "100%": { boxShadow: "0 0 20px #00d4ff88, 0 0 60px #00d4ff44" },
-                },
-            },
-            backgroundImage: {
-                "grid-pattern":
-                    "linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px)",
-            },
-            backgroundSize: {
-                "grid": "60px 60px",
+            borderRadius: {
+                "2xl": "20px",
+                "3xl": "24px",
             },
         },
     },

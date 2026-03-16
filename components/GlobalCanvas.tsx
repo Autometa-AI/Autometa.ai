@@ -4,11 +4,9 @@ import { useEffect, useRef } from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTheme } from "@/context/ThemeContext";
 
-interface Particle {
-    x: number; y: number;
-    vx: number; vy: number;
-    r: number;
-    baseR: number;
+interface Building {
+    x: number; w: number; h: number;
+    windows: { row: number; col: number; lit: boolean }[];
 }
 
 export default function GlobalCanvas() {
@@ -18,92 +16,89 @@ export default function GlobalCanvas() {
     const { theme } = useTheme();
 
     useEffect(() => {
-        // Skip canvas animation entirely on mobile
         if (isMobile) return;
-
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let W = 0, H = 0;
-        let particles: Particle[] = [];
-        let animId: number;
-        let hue = 200;
+        let W = 0, H = 0, buildings: Building[] = [], animId: number, t = 0;
 
-        const COUNT = 80;
-        const MAX_DIST = 180;
-        const SPEED = 0.2;
-        const MOUSE_RADIUS = 220;
+        function createBuildings() {
+            buildings = [];
+            let x = 0;
+            while (x < W + 80) {
+                const w = 25 + Math.random() * 45;
+                const h = 50 + Math.random() * 200;
+                const windows: Building["windows"] = [];
+                const cols = Math.floor(w / 13);
+                const rows = Math.floor(h / 16);
+                for (let r = 0; r < rows; r++)
+                    for (let c = 0; c < cols; c++)
+                        windows.push({ row: r, col: c, lit: Math.random() > 0.5 });
+                buildings.push({ x, w, h, windows });
+                x += w + 2 + Math.random() * 6;
+            }
+        }
 
         function init() {
             W = canvas!.width = window.innerWidth;
             H = canvas!.height = window.innerHeight;
-            particles = Array.from({ length: COUNT }, () => {
-                const r = Math.random() * 3 + 2; // Bigger: 2 to 5
-                return {
-                    x: Math.random() * W, y: Math.random() * H,
-                    vx: (Math.random() - 0.5) * SPEED, vy: (Math.random() - 0.5) * SPEED,
-                    r, baseR: r,
-                };
-            });
+            createBuildings();
         }
 
         function draw() {
             animId = requestAnimationFrame(draw);
+            t += 0.004;
             ctx!.clearRect(0, 0, W, H);
-            hue = (hue + 0.02) % 360;
+            const isDark = theme === "dark";
+            const buildAlpha = isDark ? 0.045 : 0.025;
+            const winOn = isDark ? "rgba(255, 107, 53, 0.12)" : "rgba(255, 107, 53, 0.1)";
+            const winOff = isDark ? "rgba(255,255,255,0.015)" : "rgba(0,0,0,0.012)";
             const mx = mouse.current.x, my = mouse.current.y;
 
-            for (const p of particles) {
-                const dxM = mx - p.x, dyM = my - p.y;
-                const distSq = dxM * dxM + dyM * dyM;
-                const radiusSq = MOUSE_RADIUS * MOUSE_RADIUS;
-                if (distSq < radiusSq && distSq > 0) {
-                    const dist = Math.sqrt(distSq);
-                    const force = (1 - dist / MOUSE_RADIUS) * 0.015;
-                    p.vx += dxM * force; p.vy += dyM * force;
-                    p.r = p.baseR + (1 - dist / MOUSE_RADIUS) * 3;
-                } else { p.r += (p.baseR - p.r) * 0.05; }
-                p.vx *= 0.99; p.vy *= 0.99;
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-                if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-            }
+            for (const b of buildings) {
+                const baseY = H - b.h;
+                ctx!.fillStyle = isDark ? `rgba(255,255,255,${buildAlpha})` : `rgba(0,0,0,${buildAlpha})`;
+                ctx!.fillRect(b.x, baseY, b.w, b.h);
 
-            ctx!.lineWidth = 1.2;
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const a = particles[i], b = particles[j];
-                    const dx = a.x - b.x, dy = a.y - b.y;
-                    const dSq = dx * dx + dy * dy;
-                    if (dSq < MAX_DIST * MAX_DIST) {
-                        const alpha = (1 - Math.sqrt(dSq) / MAX_DIST) * 0.4;
-                        ctx!.beginPath();
-                        const lightness = theme === "dark" ? 70 : 25;
-                        const sat = theme === "dark" ? 15 : 40;
-                        ctx!.strokeStyle = `hsla(${hue}, ${sat}%, ${lightness}%, ${alpha})`;
-                        ctx!.moveTo(a.x, a.y); ctx!.lineTo(b.x, b.y); ctx!.stroke();
+                // Roof accent line
+                ctx!.fillStyle = isDark ? "rgba(255, 107, 53, 0.06)" : "rgba(255, 107, 53, 0.05)";
+                ctx!.fillRect(b.x, baseY, b.w, 1.5);
+
+                for (const win of b.windows) {
+                    const wx = b.x + 4 + win.col * 13;
+                    const wy = baseY + 6 + win.row * 16;
+                    const distX = mx - (wx + 3), distY = my - (wy + 4);
+                    const dist = Math.sqrt(distX * distX + distY * distY);
+                    const mouseNear = dist < 140;
+                    const flicker = Math.sin(t * 1.5 + win.row * 0.4 + win.col * 0.6 + b.x * 0.01) > 0.6;
+                    const isLit = win.lit !== flicker;
+
+                    if (isLit || mouseNear) {
+                        const a = mouseNear ? Math.min(1, (1 - dist / 140) * 0.5 + 0.3) : 1;
+                        ctx!.globalAlpha = a;
+                        ctx!.fillStyle = winOn;
+                        ctx!.fillRect(wx, wy, 7, 9);
+                        if (mouseNear && dist < 70) {
+                            ctx!.fillStyle = isDark ? "rgba(255, 107, 53, 0.05)" : "rgba(255, 107, 53, 0.03)";
+                            ctx!.fillRect(wx - 2, wy - 2, 11, 13);
+                        }
+                        ctx!.globalAlpha = 1;
+                    } else {
+                        ctx!.fillStyle = winOff;
+                        ctx!.fillRect(wx, wy, 7, 9);
                     }
                 }
-            }
-
-            for (const p of particles) {
-                const lightness = theme === "dark" ? 90 : 15;
-                const sat = theme === "dark" ? 10 : 40;
-                ctx!.beginPath(); ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx!.fillStyle = `hsla(${hue}, ${sat}%, ${lightness}%, 0.7)`; ctx!.fill();
             }
         }
 
         const onMouseMove = (e: MouseEvent) => { mouse.current = { x: e.clientX, y: e.clientY }; };
         const onMouseLeave = () => { mouse.current = { x: -9999, y: -9999 }; };
-
         init(); draw();
         window.addEventListener("resize", init);
         window.addEventListener("mousemove", onMouseMove, { passive: true });
         window.addEventListener("mouseleave", onMouseLeave);
-
         return () => {
             cancelAnimationFrame(animId);
             window.removeEventListener("resize", init);
@@ -112,14 +107,6 @@ export default function GlobalCanvas() {
         };
     }, [isMobile, theme]);
 
-    // Render nothing on mobile
     if (isMobile) return null;
-
-    return (
-        <canvas ref={canvasRef} style={{
-            position: "fixed", top: 0, left: 0,
-            width: "100vw", height: "100vh",
-            pointerEvents: "none", zIndex: 0,
-        }} />
-    );
+    return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none", zIndex: 0 }} />;
 }

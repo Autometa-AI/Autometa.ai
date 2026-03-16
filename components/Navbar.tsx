@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home } from "lucide-react";
 import gsap from "gsap";
 import ThemeToggle from "./ThemeToggle";
 
@@ -10,7 +10,7 @@ const navLinks = [
     { label: "Services", href: "#services" },
     { label: "Process", href: "#process" },
     { label: "Results", href: "#results" },
-    { label: "Technology", href: "#technology" },
+    { label: "Stack", href: "#technology" },
     { label: "Why Us", href: "#why" },
 ];
 
@@ -25,15 +25,10 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    // GSAP staggered link entrance
     useEffect(() => {
         if (!linksRef.current) return;
         const links = linksRef.current.querySelectorAll(".nav-link");
-        gsap.fromTo(
-            links,
-            { y: -15, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, delay: 0.3, ease: "power2.out" }
-        );
+        gsap.fromTo(links, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, delay: 0.3, ease: "power2.out" });
     }, []);
 
     return (
@@ -45,32 +40,30 @@ export default function Navbar() {
                 position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
                 background: scrolled ? "var(--surface)" : "transparent",
                 borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-                backdropFilter: scrolled ? "blur(20px) saturate(1.8)" : "none",
-                WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.8)" : "none",
+                backdropFilter: scrolled ? "blur(24px) saturate(1.6)" : "none",
+                WebkitBackdropFilter: scrolled ? "blur(24px) saturate(1.6)" : "none",
                 transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
         >
-            <nav className="container-wide" style={{ height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <a href="#hero" style={{ display: "flex", alignItems: "center", gap: 9, textDecoration: "none" }}>
+            <nav className="container-wide" style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <a href="#hero" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
                     <motion.div
-                        whileHover={{ rotate: 90, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        style={{ width: 22, height: 22, border: "1.5px solid var(--text)", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center" }}
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                        style={{
+                            width: 32, height: 32, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center",
+                            background: "var(--accent)", boxShadow: "0 2px 12px var(--glow-primary)",
+                        }}
                     >
-                        <div style={{ width: 8, height: 8, background: "var(--text)", borderRadius: 1 }} />
+                        <Home size={15} color="#fff" />
                     </motion.div>
-                    <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text)", letterSpacing: "-0.01em" }}>Autometa</span>
+                    <span className="font-display" style={{ fontWeight: 700, fontSize: "1.05rem", color: "var(--text)", letterSpacing: "-0.03em" }}>autometa</span>
                 </a>
 
-                <div ref={linksRef} style={{ display: "flex", alignItems: "center", gap: 32 }} className="hidden-mobile">
+                <div ref={linksRef} style={{ display: "flex", alignItems: "center", gap: 28 }} className="hidden-mobile">
                     {navLinks.map(link => (
                         <a key={link.label} href={link.href} className="nav-link"
-                            style={{
-                                fontSize: "0.875rem", fontWeight: 500, color: "var(--text-muted)",
-                                textDecoration: "none", position: "relative",
-                                opacity: 0,
-                            }}
-                        >
+                            style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--text-muted)", textDecoration: "none", position: "relative", opacity: 0 }}>
                             {link.label}
                             <span className="nav-underline" />
                         </a>
@@ -79,14 +72,9 @@ export default function Navbar() {
 
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden-mobile">
                     <ThemeToggle />
-                    <motion.a
-                        href="#contact"
-                        className="btn-primary"
-                        style={{ fontSize: "0.875rem", padding: "0.5rem 1.25rem" }}
-                        whileHover={{ scale: 1.04, y: -1 }}
-                        whileTap={{ scale: 0.97 }}
-                    >
-                        Book a Call
+                    <motion.a href="#contact" className="btn-primary" style={{ fontSize: "0.8rem", padding: "0.5rem 1.25rem" }}
+                        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                        Book a Demo
                     </motion.a>
                 </div>
 
@@ -101,28 +89,19 @@ export default function Navbar() {
 
             <AnimatePresence>
                 {mobileOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)", backdropFilter: "blur(20px)" }}
-                    >
+                        style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)", backdropFilter: "blur(24px)" }}>
                         <div style={{ padding: "1rem 2rem", display: "flex", flexDirection: "column", gap: 12 }}>
                             {navLinks.map((link, i) => (
-                                <motion.a
-                                    key={link.label}
-                                    href={link.href}
-                                    onClick={() => setMobileOpen(false)}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
+                                <motion.a key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
+                                    initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05, duration: 0.3 }}
-                                    style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "0.9375rem" }}
-                                >
+                                    style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "0.9375rem" }}>
                                     {link.label}
                                 </motion.a>
                             ))}
-                            <a href="#contact" className="btn-primary" style={{ marginTop: 4, justifyContent: "center" }}>Book a Call</a>
+                            <a href="#contact" className="btn-primary" style={{ marginTop: 4, justifyContent: "center" }}>Book a Demo</a>
                         </div>
                     </motion.div>
                 )}

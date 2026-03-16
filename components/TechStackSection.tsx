@@ -9,18 +9,18 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const stack = [
-    { name: "Python", cat: "AI / ML" }, { name: "TensorFlow", cat: "AI / ML" },
-    { name: "PyTorch", cat: "AI / ML" }, { name: "LangChain", cat: "AI Agents" },
-    { name: "OpenAI", cat: "AI Agents" }, { name: "Hugging Face", cat: "AI / ML" },
-    { name: "UiPath", cat: "RPA" }, { name: "Power Automate", cat: "RPA" },
-    { name: "Automation Anywhere", cat: "RPA" }, { name: "Apache Kafka", cat: "Data" },
-    { name: "Apache Spark", cat: "Data" }, { name: "Databricks", cat: "Data" },
-    { name: "AWS", cat: "Cloud" }, { name: "Azure", cat: "Cloud" },
-    { name: "Google Cloud", cat: "Cloud" }, { name: "Kubernetes", cat: "Infra" },
-    { name: "Docker", cat: "Infra" }, { name: "Terraform", cat: "Infra" },
-    { name: "FastAPI", cat: "Backend" }, { name: "PostgreSQL", cat: "Backend" },
-    { name: "n8n", cat: "Workflow" }, { name: "Airflow", cat: "Workflow" },
-    { name: "ROS 2", cat: "Robotics" }, { name: "LabVIEW", cat: "Robotics" },
+    { name: "Salesforce", cat: "CRM" }, { name: "HubSpot", cat: "CRM" },
+    { name: "Follow Up Boss", cat: "CRM" }, { name: "Zillow API", cat: "MLS" },
+    { name: "RETS / RESO", cat: "MLS" }, { name: "Realtor.com", cat: "MLS" },
+    { name: "DocuSign", cat: "Transactions" }, { name: "Dotloop", cat: "Transactions" },
+    { name: "SkySlope", cat: "Transactions" }, { name: "AppFolio", cat: "Prop Mgmt" },
+    { name: "Buildium", cat: "Prop Mgmt" }, { name: "Yardi", cat: "Prop Mgmt" },
+    { name: "Twilio", cat: "Comms" }, { name: "SendGrid", cat: "Comms" },
+    { name: "OpenAI", cat: "AI" }, { name: "LangChain", cat: "AI" },
+    { name: "Zapier", cat: "Workflow" }, { name: "n8n", cat: "Workflow" },
+    { name: "Stripe", cat: "Payments" }, { name: "Plaid", cat: "Payments" },
+    { name: "AWS", cat: "Cloud" }, { name: "Google Cloud", cat: "Cloud" },
+    { name: "PostgreSQL", cat: "Data" }, { name: "Power BI", cat: "Analytics" },
 ];
 
 export default function TechStackSection() {
@@ -31,46 +31,32 @@ export default function TechStackSection() {
         if (isMobile || !gridRef.current) return;
         const cells = gridRef.current.querySelectorAll(".tech-cell");
         cells.forEach((cell) => {
-            const delay = Math.random() * 0.3;
-            gsap.fromTo(cell,
-                { opacity: 0, y: 20 },
-                {
-                    opacity: 1, y: 0, duration: 0.5, delay, ease: "power2.out",
-                    scrollTrigger: { trigger: cell, start: "top 92%", once: true }
-                }
-            );
+            gsap.fromTo(cell, { opacity: 0, y: 16 },
+                { opacity: 1, y: 0, duration: 0.4, delay: Math.random() * 0.3, ease: "power2.out",
+                    scrollTrigger: { trigger: cell, start: "top 92%", once: true } });
         });
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, [isMobile]);
 
     return (
-        <section id="technology" style={{ background: "var(--surface)", padding: "5rem 0", borderTop: "1px solid var(--border-subtle)" }}>
+        <section id="technology" style={{ padding: "6rem 0" }}>
             <div className="container-wide">
                 <div style={{ marginBottom: "3rem" }}>
-                    <span className="section-eyebrow">Tools & Platforms</span>
-                    <h2 style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 800, letterSpacing: "-0.025em", color: "var(--text)", lineHeight: 1.15 }}>Technology Stack</h2>
-                    <p style={{ fontSize: "0.9375rem", color: "var(--text-faint)", marginTop: 6, maxWidth: 420 }}>Battle-tested platforms powering enterprise automation at scale.</p>
+                    <span className="section-eyebrow">Integrations</span>
+                    <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
+                        Connects to your <span className="gradient-text">entire stack</span>
+                    </h2>
+                    <p style={{ fontSize: "0.875rem", color: "var(--text-faint)", marginTop: 6, maxWidth: 400 }}>Seamless integrations with the tools real estate teams already use.</p>
                 </div>
-
-                <div ref={gridRef} style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fill, minmax(150px, 1fr))", gap: "1px", background: "var(--border)" }}>
+                <div ref={gridRef} style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fill, minmax(140px, 1fr))", gap: 10 }}>
                     {stack.map((t) => (
-                        <motion.div
-                            key={t.name}
-                            className="tech-cell"
-                            whileHover={isMobile ? undefined : {
-                                scale: 1.04,
-                                boxShadow: "0 0 20px rgba(0,212,255,0.1)",
-                            }}
+                        <motion.div key={t.name} className="tech-cell glass-card"
+                            whileHover={isMobile ? undefined : { scale: 1.03 }}
                             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                            style={{
-                                background: "var(--bg-alt)", padding: "1rem 1.25rem",
-                                cursor: "default", border: "1px solid transparent",
-                                position: "relative", overflow: "hidden",
-                            }}
-                        >
+                            style={{ padding: "0.875rem 1rem", cursor: "default", position: "relative", overflow: "hidden", borderRadius: 14 }}>
                             <div className="tech-glow" />
-                            <div style={{ fontSize: "0.9375rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 3, position: "relative", zIndex: 1 }}>{t.name}</div>
-                            <div style={{ fontSize: "0.7rem", color: "var(--text-faint)", fontWeight: 500, position: "relative", zIndex: 1 }}>{t.cat}</div>
+                            <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 2, position: "relative", zIndex: 1 }}>{t.name}</div>
+                            <div style={{ fontSize: "0.625rem", color: "var(--text-faint)", fontWeight: 500, position: "relative", zIndex: 1, fontFamily: "'JetBrains Mono', monospace" }}>{t.cat}</div>
                         </motion.div>
                     ))}
                 </div>

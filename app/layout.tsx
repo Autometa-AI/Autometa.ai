@@ -3,22 +3,22 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
-    title: "Autometa – Engineering Intelligent Automation",
+    title: "Autometa – Intelligent Automation for Real Estate",
     description:
-        "Autometa is a premium AI automation and robotics agency specializing in intelligent systems, RPA, AI agents, and enterprise digital transformation.",
+        "Autometa automates the real estate lifecycle — from lead capture and property management to closing workflows and tenant operations — powered by AI.",
     keywords: [
-        "AI automation",
-        "robotics process automation",
-        "AI agents",
-        "enterprise automation",
-        "workflow optimization",
-        "digital transformation",
+        "real estate automation",
+        "property management AI",
+        "real estate CRM automation",
+        "tenant onboarding automation",
+        "closing workflow automation",
+        "real estate lead management",
         "Autometa",
     ],
     openGraph: {
-        title: "Autometa – Engineering Intelligent Automation",
+        title: "Autometa – Intelligent Automation for Real Estate",
         description:
-            "Premium AI automation and robotics agency focused on intelligent systems and enterprise digital transformation.",
+            "AI-powered automation for real estate brokerages, property managers, and developers. Streamline every workflow from lead to lease.",
         type: "website",
     },
 };
@@ -38,7 +38,7 @@ export default function RootLayout({
                     crossOrigin="anonymous"
                 />
                 <link
-                    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+                    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
                     rel="stylesheet"
                 />
                 <script

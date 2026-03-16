@@ -2,16 +2,15 @@
 
 import { motion } from "framer-motion";
 
-const clients = ["Siemens", "Honeywell", "Accenture", "Deloitte", "SAP", "Bosch", "ABB", "Capgemini"];
+const clients = ["RE/MAX", "Keller Williams", "Coldwell Banker", "Century 21", "Compass", "eXp Realty", "Sotheby's", "CBRE"];
 
 export default function TrustSection() {
     const doubled = [...clients, ...clients];
 
     return (
         <section style={{
-            background: "var(--surface)",
-            borderTop: "1px solid var(--border-subtle)",
-            borderBottom: "1px solid var(--border-subtle)",
+            borderTop: "1px solid var(--border)",
+            borderBottom: "1px solid var(--border)",
             padding: "2.5rem 0",
             overflow: "hidden",
         }}>
@@ -21,12 +20,12 @@ export default function TrustSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 style={{
-                    fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em",
+                    fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em",
                     textTransform: "uppercase", color: "var(--text-faint)", textAlign: "center",
-                    marginBottom: "1.75rem",
+                    marginBottom: "1.75rem", fontFamily: "'JetBrains Mono', monospace",
                 }}
             >
-                Trusted by forward-thinking enterprises
+                Trusted by leading real estate brands
             </motion.p>
 
             <div className="marquee-container">
@@ -34,18 +33,13 @@ export default function TrustSection() {
                     {doubled.map((c, i) => (
                         <motion.span
                             key={`${c}-${i}`}
-                            whileHover={{ scale: 1.15, color: "var(--text-secondary)" }}
+                            whileHover={{ scale: 1.12, color: "var(--accent)" }}
                             transition={{ type: "spring", stiffness: 400, damping: 20 }}
                             style={{
-                                fontSize: "0.875rem",
-                                fontWeight: 700,
-                                letterSpacing: "0.12em",
-                                textTransform: "uppercase",
-                                color: "var(--text-faint)",
-                                cursor: "default",
-                                flexShrink: 0,
-                                padding: "0 2rem",
-                                whiteSpace: "nowrap",
+                                fontSize: "0.85rem", fontWeight: 700,
+                                letterSpacing: "0.1em", textTransform: "uppercase",
+                                color: "var(--text-faint)", cursor: "default",
+                                flexShrink: 0, padding: "0 2rem", whiteSpace: "nowrap",
                             }}
                         >
                             {c}

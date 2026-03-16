@@ -15,16 +15,13 @@ export default function ThemeToggle() {
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
             aria-label="Toggle theme"
             style={{
-                width: 34,
-                height: 34,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 6,
+                width: 34, height: 34,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                borderRadius: 10,
                 border: "1px solid var(--border)",
-                background: "var(--surface)",
-                color: "var(--text-muted)",
-                cursor: "pointer",
+                background: "var(--card-bg)",
+                backdropFilter: "blur(8px)",
+                color: "var(--text-muted)", cursor: "pointer",
                 transition: "border-color 0.2s, color 0.2s, background 0.2s",
             }}
         >
