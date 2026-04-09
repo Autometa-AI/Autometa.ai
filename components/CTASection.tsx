@@ -87,23 +87,19 @@ export default function CTASection() {
                         fontWeight: 700, letterSpacing: "-0.04em",
                         color: "var(--text)", lineHeight: 1.08, marginBottom: "1.25rem",
                     }}>
-                        Put your real estate<br />business on <span className="gradient-text">autopilot.</span>
+                        Let&apos;s Fix Your Systems<br />and <span className="gradient-text">Scale Your Operations</span>
                     </h2>
                     <p style={{ fontSize: "1rem", color: "var(--text-subtle)", lineHeight: 1.75, marginBottom: "2rem", maxWidth: 480 }}>
-                        Book a free 30-minute demo. We&apos;ll walk through your current workflows and show you exactly which tasks we can automate.
+                        Book a free system audit. We&apos;ll analyze your current workflows and show you exactly how to streamline and automate your operations.
                     </p>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: "2rem" }}>
-                        <motion.a href="mailto:hello@autometa.ai" className="btn-primary cta-glow-btn"
+                        <motion.a href="/contact" className="btn-primary cta-glow-btn"
                             whileHover={isMobile ? undefined : { scale: 1.04 }} whileTap={isMobile ? undefined : { scale: 0.97 }}>
-                            Book a Free Demo <ArrowRight size={14} />
-                        </motion.a>
-                        <motion.a href="mailto:hello@autometa.ai" className="btn-secondary"
-                            whileHover={isMobile ? undefined : { scale: 1.03 }} whileTap={isMobile ? undefined : { scale: 0.97 }}>
-                            Get Free Workflow Audit
+                            Book Free System Audit <ArrowRight size={14} />
                         </motion.a>
                     </div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-                        {["Free workflow audit", "Same-day response", "No obligation", "Works with your tools"].map(t => (
+                        {["Free system audit", "Same-day response", "No obligation", "Works with your tools"].map(t => (
                             <span key={t} style={{ fontSize: "0.7rem", color: "var(--text-faint)", fontWeight: 500, display: "flex", alignItems: "center", gap: 4 }}>
                                 <span style={{ color: "var(--accent)", fontSize: "0.8rem" }}>&#10003;</span> {t}
                             </span>

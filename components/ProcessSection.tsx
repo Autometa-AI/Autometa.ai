@@ -9,10 +9,9 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
-    { num: "01", title: "Audit", desc: "We map every workflow in your brokerage or property management operation and quantify the hours lost to manual tasks.", deliverable: "Workflow Map + ROI Report", emoji: "🔍" },
-    { num: "02", title: "Design", desc: "Custom automation blueprint tailored to your tech stack — CRM, MLS, accounting — with zero disruption to active deals.", deliverable: "Integration Blueprint", emoji: "📐" },
-    { num: "03", title: "Build", desc: "Agile delivery with weekly demos. We wire up automations, train AI on your data, and validate against real transactions.", deliverable: "Working System", emoji: "⚡" },
-    { num: "04", title: "Launch", desc: "Go live with full monitoring. Your team gets hands-on training, and we optimize as your portfolio grows.", deliverable: "Live System + SLA", emoji: "🚀" },
+    { num: "01", title: "Audit", desc: "We analyze your current tools, workflows, and gaps — mapping out exactly where leads are lost and time is wasted.", deliverable: "Gap Analysis + ROI Report", emoji: "🔍" },
+    { num: "02", title: "Design", desc: "We create a tailored system blueprint — including CRM workflows, automation sequences, and tool integrations — designed around your team.", deliverable: "Custom System Blueprint", emoji: "📐" },
+    { num: "03", title: "Build & Automate", desc: "We implement your system end-to-end — CRM setup, automation workflows, AI integrations, dashboards — and optimize until it runs on autopilot.", deliverable: "Live System + Ongoing Support", emoji: "⚡" },
 ];
 
 export default function ProcessSection() {
@@ -64,7 +63,7 @@ export default function ProcessSection() {
                         viewport={{ once: true }} transition={{ duration: 0.5 }}>
                         <span className="section-eyebrow">How We Work</span>
                         <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
-                            From audit to <span className="gradient-text">autopilot</span>
+                            A Simple 3-Step Process to <span className="gradient-text">Fix Your Systems</span>
                         </h2>
                         {!isMobile && <p style={{ fontSize: "0.875rem", color: "var(--text-faint)", marginTop: 6 }}>Scroll to explore each phase →</p>}
                     </motion.div>

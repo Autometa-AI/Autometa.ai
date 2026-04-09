@@ -9,10 +9,26 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-const footerLinks: Record<string, string[]> = {
-    Solutions: ["Lead Automation", "Property Management", "Transaction Workflows", "CRM & MLS Integration", "AI Virtual Assistants"],
-    Company: ["About", "Case Studies", "Process", "Integrations", "Careers"],
-    Resources: ["Blog", "ROI Calculator", "Automation Guides", "Support", "Privacy Policy"],
+const footerLinks: Record<string, { label: string; href: string }[]> = {
+    Services: [
+        { label: "Lead Management Systems", href: "/services" },
+        { label: "CRM Setup & Optimization", href: "/services" },
+        { label: "Workflow Automation", href: "/services" },
+        { label: "AI Integrations", href: "/services" },
+        { label: "Custom Dashboards", href: "/services" },
+    ],
+    Company: [
+        { label: "About", href: "/about" },
+        { label: "Case Studies", href: "/case-studies" },
+        { label: "Blog", href: "/blog" },
+        { label: "Contact", href: "/contact" },
+    ],
+    Resources: [
+        { label: "Resource Hub", href: "/resources" },
+        { label: "Playbooks & Templates", href: "/resources" },
+        { label: "Automation Guides", href: "/resources" },
+        { label: "Privacy Policy", href: "#" },
+    ],
 };
 
 export default function Footer() {
@@ -51,7 +67,7 @@ export default function Footer() {
                             <span className="font-display" style={{ fontSize: "1rem", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.03em" }}>autometa</span>
                         </div>
                         <p style={{ fontSize: "0.875rem", color: "var(--text-faint)", lineHeight: 1.65, marginBottom: "1.5rem", maxWidth: 220 }}>
-                            AI-powered automation built exclusively for real estate teams.
+                            AI-powered systems and automation for real estate teams.
                         </p>
                         <a href="mailto:hello@autometa.ai" className="footer-link"
                             style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.8rem", color: "var(--text-faint)", textDecoration: "none", marginBottom: "1.25rem" }}>
@@ -77,10 +93,10 @@ export default function Footer() {
                             <h4 style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: "1rem", fontFamily: "'JetBrains Mono', monospace" }}>{cat}</h4>
                             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                                 {links.map(link => (
-                                    <li key={link}>
-                                        <a href="#" className="footer-link"
+                                    <li key={link.label}>
+                                        <a href={link.href} className="footer-link"
                                             style={{ fontSize: "0.875rem", color: "var(--text-faint)", textDecoration: "none" }}>
-                                            {link}
+                                            {link.label}
                                         </a>
                                     </li>
                                 ))}

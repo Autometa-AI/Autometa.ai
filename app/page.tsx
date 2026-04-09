@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import TrustSection from "@/components/TrustSection";
+import ProblemSection from "@/components/ProblemSection";
+import SolutionSection from "@/components/SolutionSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProcessSection from "@/components/ProcessSection";
-import CaseStudiesSection from "@/components/CaseStudiesSection";
-import TechStackSection from "@/components/TechStackSection";
-import WhyAutometaSection from "@/components/WhyAutometaSection";
+import ResultsSection from "@/components/ResultsSection";
+import ResourceHubTeaser from "@/components/ResourceHubTeaser";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import GlobalCanvas from "@/components/GlobalCanvas";
@@ -22,12 +22,12 @@ export default function Home() {
             <div style={{ position: "relative", zIndex: 1 }}>
                 <Navbar />
                 <HeroSection />
-                <TrustSection />
+                <ProblemSection />
+                <SolutionSection />
                 <ServicesSection />
                 <ProcessSection />
-                <CaseStudiesSection />
-                <TechStackSection />
-                <WhyAutometaSection />
+                <ResultsSection />
+                <ResourceHubTeaser />
                 <CTASection />
                 <Footer />
             </div>

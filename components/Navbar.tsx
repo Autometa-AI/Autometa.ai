@@ -2,16 +2,16 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { Menu, X, Home } from "lucide-react";
 import gsap from "gsap";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-    { label: "Services", href: "#services" },
-    { label: "Process", href: "#process" },
-    { label: "Results", href: "#results" },
-    { label: "Stack", href: "#technology" },
-    { label: "Why Us", href: "#why" },
+    { label: "Services", href: "/services" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Resources", href: "/resources" },
+    { label: "About", href: "/about" },
 ];
 
 export default function Navbar() {
@@ -72,9 +72,9 @@ export default function Navbar() {
 
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden-mobile">
                     <ThemeToggle />
-                    <motion.a href="#contact" className="btn-primary" style={{ fontSize: "0.8rem", padding: "0.5rem 1.25rem" }}
+                    <motion.a href="/contact" className="btn-primary" style={{ fontSize: "0.8rem", padding: "0.5rem 1.25rem" }}
                         whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                        Book a Demo
+                        Book Free Audit
                     </motion.a>
                 </div>
 
@@ -101,7 +101,7 @@ export default function Navbar() {
                                     {link.label}
                                 </motion.a>
                             ))}
-                            <a href="#contact" className="btn-primary" style={{ marginTop: 4, justifyContent: "center" }}>Book a Demo</a>
+                            <a href="/contact" className="btn-primary" style={{ marginTop: 4, justifyContent: "center" }}>Book Free Audit</a>
                         </div>
                     </motion.div>
                 )}

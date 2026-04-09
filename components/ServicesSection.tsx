@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { ArrowRight, Home, Wrench, FileText, Database, MessageSquare } from "lucide-react";
+import { ArrowRight, Users, Database, Workflow, Bot, BarChart3, Wrench } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -10,11 +10,12 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-    { icon: <Home size={20} />, number: "01", title: "Lead Capture & Nurture", description: "AI-powered lead scoring, instant response bots, and drip campaigns that convert inquiries into showings — capturing leads from Zillow, Realtor.com, and your website 24/7.", tags: ["Lead Scoring", "Auto-Respond", "Drip Campaigns", "Multi-Channel"] },
-    { icon: <Wrench size={20} />, number: "02", title: "Property Management", description: "Automate rent collection, maintenance requests, lease renewals, and tenant communications. Zero manual follow-ups across your entire portfolio.", tags: ["Rent Collection", "Maintenance", "Lease Tracking", "Tenant Portal"] },
-    { icon: <FileText size={20} />, number: "03", title: "Transaction & Closing", description: "From offer to close in half the time. Automated document generation, e-signatures, compliance checks, and deadline tracking across every deal.", tags: ["Doc Generation", "E-Signatures", "Compliance", "Deadlines"] },
-    { icon: <Database size={20} />, number: "04", title: "CRM & MLS Integration", description: "Seamless sync between your CRM, MLS feeds, marketing tools, and accounting systems. One source of truth for every listing, contact, and transaction.", tags: ["MLS Sync", "CRM Auto", "Data Pipes", "Real-Time"] },
-    { icon: <MessageSquare size={20} />, number: "05", title: "AI Virtual Assistants", description: "24/7 AI agents that answer property questions, schedule tours, qualify buyers, and hand off warm leads to your team — on web, SMS, and social.", tags: ["Chatbots", "Tours", "Qualification", "Omnichannel"] },
+    { icon: <Users size={20} />, number: "01", title: "Lead Management Systems", description: "Centralized lead capture from all sources. Track, score, and route leads automatically so your team focuses on the hottest opportunities.", tags: ["Lead Capture", "Pipeline Tracking", "Auto-Routing", "Scoring"] },
+    { icon: <Database size={20} />, number: "02", title: "CRM Setup & Optimization", description: "Implement and optimize your CRM with structured workflows, automated data entry, and full pipeline visibility from first touch to close.", tags: ["CRM Setup", "Data Sync", "Pipeline Views", "Reporting"] },
+    { icon: <Workflow size={20} />, number: "03", title: "Workflow Automation", description: "Automate follow-ups, task assignments, notifications, and handoffs. Eliminate manual work and ensure nothing falls through the cracks.", tags: ["Auto Follow-ups", "Task Triggers", "Notifications", "Handoffs"] },
+    { icon: <Bot size={20} />, number: "04", title: "AI Integrations", description: "AI-powered responses on WhatsApp, email, and SMS. Intelligent lead qualification, sentiment analysis, and predictive scoring.", tags: ["AI Responses", "WhatsApp Bot", "Lead Scoring", "Smart Routing"] },
+    { icon: <BarChart3 size={20} />, number: "05", title: "Custom Dashboards", description: "Real-time dashboards that show pipeline health, agent performance, conversion rates, and revenue forecasts at a glance.", tags: ["Real-Time Data", "Agent KPIs", "Conversion Tracking", "Forecasting"] },
+    { icon: <Wrench size={20} />, number: "06", title: "Internal Tools", description: "Custom-built tools for your specific workflows — inventory trackers, commission calculators, document generators, and more.", tags: ["Custom Tools", "Inventory", "Calculators", "Doc Gen"] },
 ];
 
 function TiltCard({ children }: { children: React.ReactNode }) {
@@ -59,18 +60,22 @@ export default function ServicesSection() {
         <section id="services" style={{ padding: "6rem 0", position: "relative" }}>
             <div className="container-wide">
                 <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "3rem" }}>
-                    <span className="section-eyebrow">What We Automate</span>
+                    <span className="section-eyebrow">Services</span>
                     <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
-                            Every workflow.<br /><span className="gradient-text">Automated.</span>
+                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1, maxWidth: 560 }}>
+                            Everything You Need for a <span className="gradient-text">High-Performance</span> Operation
                         </h2>
-                        <motion.a href="#contact" className="btn-secondary" style={{ fontSize: "0.8rem" }} whileHover={{ scale: 1.03 }}>
-                            Get a free audit <ArrowRight size={13} />
+                        <motion.a href="/services" className="btn-secondary" style={{ fontSize: "0.8rem" }} whileHover={{ scale: 1.03 }}>
+                            Explore Services <ArrowRight size={13} />
                         </motion.a>
                     </div>
                 </motion.div>
 
-                <div ref={containerRef} className="bento-grid">
+                <div ref={containerRef} style={{
+                    display: "grid",
+                    gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+                    gap: 12,
+                }}>
                     {services.map((s) => (
                         <TiltCard key={s.title}>
                             <div className="service-card glass-card" style={{ padding: "1.5rem", cursor: "default", height: "100%" }}>
