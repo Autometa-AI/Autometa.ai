@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
-    title: "Autometa – Intelligent Automation for Real Estate",
+    title: "Autometa – AI Systems for Real Estate Agencies",
     description:
-        "Autometa automates the real estate lifecycle — from lead capture and property management to closing workflows and tenant operations — powered by AI.",
+        "Autometa builds AI-powered systems for real estate agencies — from lead capture and property management to closing workflows and tenant operations.",
     keywords: [
         "real estate automation",
         "property management AI",
@@ -14,11 +13,12 @@ export const metadata: Metadata = {
         "closing workflow automation",
         "real estate lead management",
         "Autometa",
+        "AI for real estate",
     ],
     openGraph: {
-        title: "Autometa – Intelligent Automation for Real Estate",
+        title: "Autometa – AI Systems for Real Estate Agencies",
         description:
-            "AI-powered automation for real estate brokerages, property managers, and developers. Streamline every workflow from lead to lease.",
+            "AI-powered systems for real estate agencies. Streamline every workflow from lead to lease.",
         type: "website",
     },
 };
@@ -29,7 +29,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" data-theme="dark" className="dark" style={{ colorScheme: "dark" }}>
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
@@ -41,27 +41,8 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
                     rel="stylesheet"
                 />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            (function() {
-                                try {
-                                    var theme = localStorage.getItem('autometa-theme');
-                                    var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-                                    if (!theme && supportDarkMode) theme = 'dark';
-                                    if (theme === 'dark') {
-                                        document.documentElement.classList.add('dark');
-                                        document.documentElement.setAttribute('data-theme', 'dark');
-                                    }
-                                } catch (e) {}
-                            })();
-                        `,
-                    }}
-                />
             </head>
-            <body>
-                <ThemeProvider>{children}</ThemeProvider>
-            </body>
+            <body>{children}</body>
         </html>
     );
 }

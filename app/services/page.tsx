@@ -1,84 +1,124 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Users, Database, Workflow, Bot, BarChart3, Wrench, MessageSquare, Phone, Zap, Settings, Monitor, Smartphone, Link2 } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight, Users, Database, Workflow, Bot, Phone, Zap, BarChart3, Wrench, Smartphone, Link2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingContact from "@/components/FloatingContact";
 import { useIsMobile } from "@/hooks/useIsMobile";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const coreServices = [
     {
-        icon: <Users size={24} />, title: "Lead Management Systems",
-        features: ["Centralized lead capture from all sources", "Automated pipeline tracking & scoring", "Intelligent lead routing to agents"],
+        icon: <Users size={26} />, title: "Lead Management Systems",
+        desc: "Centralized lead capture from all sources with automated pipeline tracking, scoring, and intelligent routing to agents.",
+        features: ["Multi-channel capture", "Auto-routing", "Lead scoring", "SLA alerts"],
         outcome: "Never lose a lead again",
+        accent: "#ff6b35",
     },
     {
-        icon: <Database size={24} />, title: "CRM Setup & Optimization",
-        features: ["CRM implementation & configuration", "Workflow setup & automation rules", "Data migration & cleanup"],
+        icon: <Database size={26} />, title: "CRM Setup & Optimization",
+        desc: "Your CRM, configured around your exact workflow. Structured deal stages, automated data entry, clean reporting.",
+        features: ["CRM implementation", "Data migration", "Pipeline design", "Custom fields"],
         outcome: "Full pipeline visibility from day one",
+        accent: "#3b82f6",
     },
     {
-        icon: <Workflow size={24} />, title: "Workflow Automation",
-        features: ["Automated follow-up sequences", "Task triggers & assignment rules", "Deadline & notification systems"],
+        icon: <Workflow size={26} />, title: "Workflow Automation",
+        desc: "Automate follow-up sequences, task triggers, assignment rules, deadline notifications, and handoff systems.",
+        features: ["Drip sequences", "Task triggers", "Doc automation", "Handoff rules"],
         outcome: "Eliminate manual repetitive work",
+        accent: "#22c55e",
     },
 ];
 
 const aiServices = [
     {
-        icon: <Bot size={24} />, title: "AI Follow-Up Systems",
+        icon: <Bot size={26} />, title: "AI Follow-Up Systems",
         desc: "Automated WhatsApp, email, and SMS responses that engage leads instantly and nurture them through your pipeline.",
+        features: ["WhatsApp AI bot", "Email auto-replies", "Lead qualification", "Smart routing"],
         outcome: "Consistent, timely communication on autopilot",
+        accent: "#a855f7",
     },
     {
-        icon: <Phone size={24} />, title: "Communication Tracking",
+        icon: <Phone size={26} />, title: "Communication Tracking",
         desc: "Complete logs of every call, message, and interaction — tied to each lead and deal for full accountability.",
+        features: ["Call logging", "Message tracking", "Interaction history", "Full audit trail"],
         outcome: "Full visibility on every conversation",
+        accent: "#f59e0b",
     },
     {
-        icon: <Zap size={24} />, title: "Smart Automation",
+        icon: <Zap size={26} />, title: "Smart Automation",
         desc: "Behavior-based triggers that respond to lead actions — site visits, form fills, message opens — without manual intervention.",
+        features: ["Webhooks", "Real-time triggers", "Conditional logic", "Multi-step flows"],
         outcome: "Self-running systems that scale with you",
+        accent: "#ec4899",
     },
 ];
 
 const customSolutions = [
-    { icon: <BarChart3 size={20} />, label: "Custom Dashboards" },
-    { icon: <Wrench size={20} />, label: "Internal Tools" },
-    { icon: <Smartphone size={20} />, label: "Mobile Apps" },
-    { icon: <Link2 size={20} />, label: "Integrations" },
+    {
+        icon: <BarChart3 size={26} />, label: "Custom Dashboards",
+        desc: "Real-time analytics dashboards showing pipeline health, agent performance, and revenue forecasts.",
+        accent: "#ff6b35",
+    },
+    {
+        icon: <Wrench size={26} />, label: "Internal Tools",
+        desc: "Custom-built tools — inventory trackers, deal rooms, commission calculators, doc generators.",
+        accent: "#3b82f6",
+    },
+    {
+        icon: <Smartphone size={26} />, label: "Mobile Apps",
+        desc: "Native mobile applications for field agents to manage leads, log visits, and close deals on the go.",
+        accent: "#22c55e",
+    },
+    {
+        icon: <Link2 size={26} />, label: "Integrations",
+        desc: "Connect CRMs, portals, phone systems, payment processors, and ad platforms into one unified flow.",
+        accent: "#a855f7",
+    },
 ];
 
-const systemFlow = ["Lead Sources", "Lead Management", "CRM", "Automation", "Execution", "Insights"];
-
-const engagementModels = [
-    { title: "System Setup", desc: "One-time implementation of your complete system — CRM, automations, dashboards, and integrations.", tag: "Most Popular" },
-    { title: "Ongoing Support", desc: "Continuous optimization, monitoring, and support to keep your systems running at peak performance.", tag: "Recommended" },
-    { title: "Custom Development", desc: "Bespoke tools, apps, and integrations built from scratch for your unique operational needs.", tag: "Enterprise" },
+const howItWorks = [
+    { num: "01", title: "Discovery", desc: "Free 30-min call to understand your operations and growth goals." },
+    { num: "02", title: "Audit", desc: "We map your workflows and identify exactly where revenue leaks." },
+    { num: "03", title: "Design", desc: "Tailored blueprint — CRM schemas, automation flows, AI integrations." },
+    { num: "04", title: "Build & Deploy", desc: "End-to-end build, integration, launch, and team training." },
+    { num: "05", title: "Optimize", desc: "Ongoing monitoring, optimization, and new feature rollouts." },
 ];
 
 export default function ServicesPage() {
-    const coreRef = useRef<HTMLDivElement>(null);
-    const aiRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
 
-    useEffect(() => {
-        [coreRef, aiRef].forEach(ref => {
-            if (!ref.current) return;
-            const cards = ref.current.querySelectorAll(".srv-card");
-            gsap.set(cards, { opacity: 0, y: 24 });
-            ScrollTrigger.batch(cards, {
-                onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power3.out", overwrite: true }),
-                start: "top 90%",
-            });
-        });
-        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-    }, []);
+    const renderServiceCard = (s: { icon: React.ReactNode; title: string; desc: string; features: string[]; outcome: string; accent: string }) => (
+        <div key={s.title} className="glass-card" style={{ padding: isMobile ? "1.75rem" : "2rem 2.25rem", display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                <div style={{
+                    width: 56, height: 56, borderRadius: 16,
+                    background: `${s.accent}14`, border: `1px solid ${s.accent}30`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: s.accent, flexShrink: 0,
+                }}>
+                    {s.icon}
+                </div>
+                <h3 className="font-display" style={{ fontSize: "1.35rem", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.015em" }}>
+                    {s.title}
+                </h3>
+            </div>
+            <p style={{ fontSize: "1.05rem", color: "var(--text-muted)", lineHeight: 1.7 }}>{s.desc}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {s.features.map(f => (
+                    <span key={f} className="tag" style={{ fontSize: "0.75rem" }}>{f}</span>
+                ))}
+            </div>
+            <div style={{
+                padding: "0.55rem 0.85rem", background: "var(--tag-bg)",
+                border: "1px solid var(--tag-border)", borderRadius: 8,
+                fontSize: "0.8rem", fontWeight: 600, color: "var(--accent)",
+                fontFamily: "'JetBrains Mono', monospace",
+            }}>
+                {s.outcome}
+            </div>
+        </div>
+    );
 
     return (
         <main style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", overflowX: "hidden" }}>
@@ -87,72 +127,56 @@ export default function ServicesPage() {
             {/* Hero */}
             <section style={{ padding: "8rem 0 4rem", position: "relative" }}>
                 <div className="mesh-bg" />
-                <div className="container-wide" style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: 680 }}>
+                <div className="container-wide" style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: 720 }}>
                     <span className="section-eyebrow">Our Services</span>
-                    <h1 className="font-display" style={{ fontSize: "clamp(2rem, 4.5vw, 3.25rem)", fontWeight: 700, letterSpacing: "-0.04em", color: "var(--text)", lineHeight: 1.08, marginBottom: 16 }}>
-                        Everything You Need to <span className="gradient-text">Scale Operations</span>
+                    <h1 className="font-display" style={{
+                        fontSize: "clamp(2.2rem, 4.8vw, 3.5rem)",
+                        fontWeight: 700, letterSpacing: "-0.04em",
+                        color: "var(--text)", lineHeight: 1.08, marginBottom: 18,
+                    }}>
+                        We Offer <span className="gradient-text">3 Types</span> of Services
                     </h1>
-                    <p style={{ fontSize: "1rem", color: "var(--text-subtle)", lineHeight: 1.75, marginBottom: 28 }}>
-                        From lead management to custom tools — we build the systems that power high-performance real estate teams.
+                    <p style={{ fontSize: "1.1rem", color: "var(--text-muted)", lineHeight: 1.75, marginBottom: 28 }}>
+                        Core Systems, AI Integrations, and Custom Solutions — built together or independently to power high-performance real estate teams.
                     </p>
-                    <a href="/contact" className="btn-primary">Book Free System Audit <ArrowRight size={14} /></a>
+                    <a href="/contact" className="btn-primary">Book Audit <ArrowRight size={15} /></a>
                 </div>
             </section>
 
             {/* Core Services */}
             <section style={{ padding: "4rem 0" }}>
                 <div className="container-wide">
-                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "2.5rem" }}>
+                    <div style={{ marginBottom: "2.5rem" }}>
                         <span className="section-eyebrow">Core Services</span>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
+                        <h2 className="font-display" style={{
+                            fontSize: "clamp(2rem, 3.8vw, 2.8rem)",
+                            fontWeight: 700, letterSpacing: "-0.03em",
+                            color: "var(--text)", lineHeight: 1.1,
+                        }}>
                             Build Your <span className="gradient-text">Foundation</span>
                         </h2>
-                    </motion.div>
-                    <div ref={coreRef} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
-                        {coreServices.map(s => (
-                            <div key={s.title} className="srv-card glass-card" style={{ padding: "2rem 1.5rem" }}>
-                                <div style={{ width: 48, height: 48, borderRadius: 14, background: "var(--tag-bg)", border: "1px solid var(--tag-border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--accent)", marginBottom: 16 }}>
-                                    {s.icon}
-                                </div>
-                                <h3 className="font-display" style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--text)", marginBottom: 12 }}>{s.title}</h3>
-                                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
-                                    {s.features.map(f => (
-                                        <li key={f} style={{ fontSize: "0.85rem", color: "var(--text-subtle)", display: "flex", alignItems: "center", gap: 8 }}>
-                                            <span style={{ color: "var(--accent)", fontSize: "0.75rem" }}>&#10003;</span> {f}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div style={{ padding: "0.5rem 0.75rem", background: "var(--tag-bg)", border: "1px solid var(--tag-border)", borderRadius: 8, fontSize: "0.75rem", fontWeight: 600, color: "var(--accent)", fontFamily: "'JetBrains Mono', monospace" }}>
-                                    {s.outcome}
-                                </div>
-                            </div>
-                        ))}
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                        {coreServices.map(renderServiceCard)}
                     </div>
                 </div>
             </section>
 
-            {/* Automation & AI */}
+            {/* AI Integrations */}
             <section style={{ padding: "4rem 0" }}>
                 <div className="container-wide">
-                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "2.5rem" }}>
-                        <span className="section-eyebrow">Automation & AI</span>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
+                    <div style={{ marginBottom: "2.5rem" }}>
+                        <span className="section-eyebrow">AI Integrations</span>
+                        <h2 className="font-display" style={{
+                            fontSize: "clamp(2rem, 3.8vw, 2.8rem)",
+                            fontWeight: 700, letterSpacing: "-0.03em",
+                            color: "var(--text)", lineHeight: 1.1,
+                        }}>
                             Intelligent <span className="gradient-text">Automation</span>
                         </h2>
-                    </motion.div>
-                    <div ref={aiRef} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
-                        {aiServices.map(s => (
-                            <div key={s.title} className="srv-card glass-card" style={{ padding: "2rem 1.5rem" }}>
-                                <div style={{ width: 48, height: 48, borderRadius: 14, background: "var(--tag-bg)", border: "1px solid var(--tag-border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--accent)", marginBottom: 16 }}>
-                                    {s.icon}
-                                </div>
-                                <h3 className="font-display" style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>{s.title}</h3>
-                                <p style={{ fontSize: "0.85rem", color: "var(--text-subtle)", lineHeight: 1.7, marginBottom: 16 }}>{s.desc}</p>
-                                <div style={{ padding: "0.5rem 0.75rem", background: "var(--tag-bg)", border: "1px solid var(--tag-border)", borderRadius: 8, fontSize: "0.75rem", fontWeight: 600, color: "var(--accent)", fontFamily: "'JetBrains Mono', monospace" }}>
-                                    {s.outcome}
-                                </div>
-                            </div>
-                        ))}
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                        {aiServices.map(renderServiceCard)}
                     </div>
                 </div>
             </section>
@@ -160,65 +184,71 @@ export default function ServicesPage() {
             {/* Custom Solutions */}
             <section style={{ padding: "4rem 0" }}>
                 <div className="container-wide">
-                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "2.5rem" }}>
+                    <div style={{ marginBottom: "2.5rem" }}>
                         <span className="section-eyebrow">Custom Solutions</span>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
+                        <h2 className="font-display" style={{
+                            fontSize: "clamp(2rem, 3.8vw, 2.8rem)",
+                            fontWeight: 700, letterSpacing: "-0.03em",
+                            color: "var(--text)", lineHeight: 1.1,
+                        }}>
                             Built <span className="gradient-text">For You</span>
                         </h2>
-                    </motion.div>
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 12 }}>
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: 16 }}>
                         {customSolutions.map(s => (
-                            <motion.div key={s.label} className="glass-card" style={{ padding: "1.5rem", textAlign: "center" }}
-                                whileHover={{ scale: 1.02 }}>
-                                <div style={{ width: 44, height: 44, borderRadius: 12, background: "var(--tag-bg)", border: "1px solid var(--tag-border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--accent)", margin: "0 auto 10px" }}>
+                            <div key={s.label} className="glass-card" style={{ padding: "2rem", display: "flex", gap: 18, alignItems: "flex-start" }}>
+                                <div style={{
+                                    width: 52, height: 52, borderRadius: 14,
+                                    background: `${s.accent}14`, border: `1px solid ${s.accent}30`,
+                                    display: "flex", alignItems: "center", justifyContent: "center",
+                                    color: s.accent, flexShrink: 0,
+                                }}>
                                     {s.icon}
                                 </div>
-                                <span style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--text)" }}>{s.label}</span>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* System Flow */}
-            <section style={{ padding: "4rem 0" }}>
-                <div className="container-wide">
-                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "2.5rem", textAlign: "center" }}>
-                        <span className="section-eyebrow">System Flow</span>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
-                            How It All <span className="gradient-text">Connects</span>
-                        </h2>
-                    </motion.div>
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: isMobile ? 8 : 0 }}>
-                        {systemFlow.map((step, i) => (
-                            <div key={step} style={{ display: "flex", alignItems: "center" }}>
-                                <div className="glass-card" style={{ padding: "0.75rem 1.25rem", whiteSpace: "nowrap" }}>
-                                    <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text)" }}>{step}</span>
+                                <div>
+                                    <h3 className="font-display" style={{ fontSize: "1.2rem", fontWeight: 700, color: "var(--text)", marginBottom: 6 }}>
+                                        {s.label}
+                                    </h3>
+                                    <p style={{ fontSize: "0.98rem", color: "var(--text-muted)", lineHeight: 1.7 }}>{s.desc}</p>
                                 </div>
-                                {i < systemFlow.length - 1 && (
-                                    <ArrowRight size={16} style={{ color: "var(--accent)", margin: "0 6px", flexShrink: 0 }} />
-                                )}
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Engagement Models */}
+            {/* How It Works */}
             <section style={{ padding: "4rem 0" }}>
                 <div className="container-wide">
-                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "2.5rem", textAlign: "center" }}>
-                        <span className="section-eyebrow">Engagement</span>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
-                            Choose Your <span className="gradient-text">Model</span>
+                    <div style={{ marginBottom: "2.5rem", textAlign: "center" }}>
+                        <span className="section-eyebrow" style={{ justifyContent: "center" }}>How It Works</span>
+                        <h2 className="font-display" style={{
+                            fontSize: "clamp(2rem, 3.8vw, 2.8rem)",
+                            fontWeight: 700, letterSpacing: "-0.03em",
+                            color: "var(--text)", lineHeight: 1.1,
+                        }}>
+                            Step by <span className="gradient-text">Step</span>
                         </h2>
-                    </motion.div>
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
-                        {engagementModels.map(m => (
-                            <div key={m.title} className="glass-card" style={{ padding: "2rem 1.5rem", position: "relative" }}>
-                                <span className="tag" style={{ marginBottom: 12, display: "inline-block" }}>{m.tag}</span>
-                                <h3 className="font-display" style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>{m.title}</h3>
-                                <p style={{ fontSize: "0.85rem", color: "var(--text-subtle)", lineHeight: 1.7 }}>{m.desc}</p>
+                    </div>
+                    <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 16 : 0, alignItems: "stretch", justifyContent: "center" }}>
+                        {howItWorks.map((step, i) => (
+                            <div key={step.num} style={{ display: "flex", alignItems: "center", flex: 1 }}>
+                                <div className="glass-card" style={{ padding: "1.5rem", textAlign: "center", flex: 1 }}>
+                                    <div style={{
+                                        fontSize: "0.7rem", fontWeight: 700, color: "var(--accent)",
+                                        fontFamily: "'JetBrains Mono', monospace",
+                                        letterSpacing: "0.08em", marginBottom: 8,
+                                    }}>
+                                        STEP {step.num}
+                                    </div>
+                                    <h4 className="font-display" style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--text)", marginBottom: 6 }}>
+                                        {step.title}
+                                    </h4>
+                                    <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: 1.6 }}>{step.desc}</p>
+                                </div>
+                                {i < howItWorks.length - 1 && !isMobile && (
+                                    <ArrowRight size={18} style={{ color: "var(--accent)", margin: "0 8px", flexShrink: 0 }} />
+                                )}
                             </div>
                         ))}
                     </div>
@@ -229,18 +259,23 @@ export default function ServicesPage() {
             <section style={{ padding: "4rem 0 6rem" }}>
                 <div className="container-wide" style={{ textAlign: "center" }}>
                     <div className="glass-card" style={{ padding: isMobile ? "2.5rem 1.5rem" : "3.5rem 3rem", maxWidth: 640, margin: "0 auto" }}>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, color: "var(--text)", marginBottom: 12, letterSpacing: "-0.03em" }}>
+                        <h2 className="font-display" style={{
+                            fontSize: "clamp(1.6rem, 3.2vw, 2.2rem)",
+                            fontWeight: 700, color: "var(--text)",
+                            marginBottom: 12, letterSpacing: "-0.03em",
+                        }}>
                             Ready to <span className="gradient-text">Scale?</span>
                         </h2>
-                        <p style={{ fontSize: "0.95rem", color: "var(--text-subtle)", lineHeight: 1.7, marginBottom: 24 }}>
+                        <p style={{ fontSize: "1rem", color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 24 }}>
                             Book a free system audit and see exactly how we can streamline your operations.
                         </p>
-                        <a href="/contact" className="btn-primary">Book Free System Audit <ArrowRight size={14} /></a>
+                        <a href="/contact" className="btn-primary">Book Audit <ArrowRight size={15} /></a>
                     </div>
                 </div>
             </section>
 
             <Footer />
+            <FloatingContact />
         </main>
     );
 }

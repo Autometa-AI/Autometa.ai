@@ -148,7 +148,7 @@ export default function AboutPage() {
                         <p style={{ fontSize: "0.95rem", color: "var(--text-subtle)", lineHeight: 1.7, marginBottom: 24 }}>
                             Ready to transform your operations? Let&apos;s talk.
                         </p>
-                        <a href="/contact" className="btn-primary">Book Free System Audit <ArrowRight size={14} /></a>
+                        <a href="/contact" className="btn-primary">Book Audit <ArrowRight size={14} /></a>
                     </div>
                 </div>
             </section>

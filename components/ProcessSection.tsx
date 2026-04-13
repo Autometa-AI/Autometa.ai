@@ -1,98 +1,161 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+    PhoneCall,
+    Search,
+    PencilRuler,
+    Rocket,
+    TrendingUp,
+    ArrowRight,
+} from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+type Step = {
+    num: string;
+    icon: React.ReactNode;
+    title: string;
+    desc: string;
+    deliverables: string[];
+};
 
-const steps = [
-    { num: "01", title: "Audit", desc: "We analyze your current tools, workflows, and gaps — mapping out exactly where leads are lost and time is wasted.", deliverable: "Gap Analysis + ROI Report", emoji: "🔍" },
-    { num: "02", title: "Design", desc: "We create a tailored system blueprint — including CRM workflows, automation sequences, and tool integrations — designed around your team.", deliverable: "Custom System Blueprint", emoji: "📐" },
-    { num: "03", title: "Build & Automate", desc: "We implement your system end-to-end — CRM setup, automation workflows, AI integrations, dashboards — and optimize until it runs on autopilot.", deliverable: "Live System + Ongoing Support", emoji: "⚡" },
+const steps: Step[] = [
+    {
+        num: "01",
+        icon: <PhoneCall size={22} />,
+        title: "Discovery Call",
+        desc: "We start with a free 30-minute call to understand your operations, pain points, and growth goals. No pitch — just clarity on what's actually broken.",
+        deliverables: ["Free 30-min consultation", "Operations snapshot", "Quick-win opportunities"],
+    },
+    {
+        num: "02",
+        icon: <Search size={22} />,
+        title: "System Audit",
+        desc: "We dive deep into your current tools, workflows, and data. We map every lead journey and identify exactly where revenue leaks.",
+        deliverables: ["Workflow map", "Gap analysis report", "ROI projection"],
+    },
+    {
+        num: "03",
+        icon: <PencilRuler size={22} />,
+        title: "System Design",
+        desc: "We design a tailored blueprint — CRM schemas, automation flows, AI integrations, and custom tools — built around your real estate workflow.",
+        deliverables: ["Custom blueprint", "Tool stack plan", "Automation diagrams"],
+    },
+    {
+        num: "04",
+        icon: <Rocket size={22} />,
+        title: "Build & Deploy",
+        desc: "We build, integrate, and launch the entire system. CRM setup, automations, dashboards, AI — delivered end-to-end and tested with your team.",
+        deliverables: ["Live CRM + automations", "Team training", "Docs + playbooks"],
+    },
+    {
+        num: "05",
+        icon: <TrendingUp size={22} />,
+        title: "Optimize & Scale",
+        desc: "We monitor, optimize, and iterate. New features, new integrations, ongoing improvements — so your system compounds in value every month.",
+        deliverables: ["Monthly reviews", "Continuous optimization", "New feature rollouts"],
+    },
 ];
 
 export default function ProcessSection() {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
-    const progressRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
 
-    useEffect(() => {
-        if (isMobile) return;
-        const section = sectionRef.current;
-        const track = trackRef.current;
-        if (!section || !track) return;
-
-        const totalWidth = track.scrollWidth - window.innerWidth;
-
-        const scrollTween = gsap.to(track, {
-            x: -totalWidth, ease: "none",
-            scrollTrigger: { trigger: section, pin: true, scrub: 1, end: () => `+=${totalWidth}`, invalidateOnRefresh: true },
-        });
-
-        if (progressRef.current) {
-            gsap.to(progressRef.current, {
-                scaleX: 1, ease: "none",
-                scrollTrigger: { trigger: section, scrub: 1, start: "top top", end: () => `+=${totalWidth}` },
-            });
-        }
-
-        const cards = track.querySelectorAll(".process-card");
-        cards.forEach((card) => {
-            gsap.fromTo(card, { opacity: 0, y: 30, scale: 0.95 },
-                { opacity: 1, y: 0, scale: 1, duration: 0.6, scrollTrigger: { trigger: card, containerAnimation: scrollTween, start: "left 80%", end: "left 40%", scrub: 1 } });
-        });
-        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-    }, [isMobile]);
-
     return (
-        <section id="process" ref={sectionRef} style={{ overflow: "hidden", position: "relative" }}>
-            {!isMobile && (
-                <div ref={progressRef} style={{
-                    position: "absolute", top: 0, left: 0, width: "100%", height: 3,
-                    background: "var(--gradient-primary)", borderRadius: 2,
-                    transformOrigin: "left", transform: "scaleX(0)", zIndex: 2,
-                }} />
-            )}
-            <div style={{ padding: "5rem 0" }}>
-                <div className="container-wide" style={{ marginBottom: "3rem" }}>
-                    <motion.div initial={isMobile ? undefined : { opacity: 0, y: 16 }} whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-                        viewport={{ once: true }} transition={{ duration: 0.5 }}>
-                        <span className="section-eyebrow">How We Work</span>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1 }}>
-                            A Simple 3-Step Process to <span className="gradient-text">Fix Your Systems</span>
-                        </h2>
-                        {!isMobile && <p style={{ fontSize: "0.875rem", color: "var(--text-faint)", marginTop: 6 }}>Scroll to explore each phase →</p>}
-                    </motion.div>
+        <section id="process" style={{ padding: "6rem 0 7rem", position: "relative" }}>
+            <div className="container-wide">
+                {/* Header */}
+                <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 4rem" }}>
+                    <span className="section-eyebrow" style={{ justifyContent: "center" }}>How We Work</span>
+                    <h2
+                        className="font-display"
+                        style={{
+                            fontSize: "clamp(2.2rem, 4.2vw, 3.25rem)",
+                            fontWeight: 700,
+                            letterSpacing: "-0.035em",
+                            color: "var(--text)",
+                            lineHeight: 1.08,
+                            marginBottom: 16,
+                        }}
+                    >
+                        From the <span className="gradient-text">First Call</span> to Project Delivery
+                    </h2>
+                    <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
+                        A proven 5-step process that turns fragmented operations into a scalable, AI-powered system — with zero guesswork.
+                    </p>
                 </div>
 
-                <div ref={trackRef} style={isMobile ? {
-                    display: "grid", gridTemplateColumns: "1fr", gap: 12, margin: "0 1.5rem",
-                } : {
-                    display: "flex", gap: 16, paddingLeft: "3rem", paddingRight: "50vw", willChange: "transform",
-                }}>
+                {/* Vertical Steps */}
+                <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
+                    {/* Vertical line */}
+                    {!isMobile && (
+                        <div
+                            style={{
+                                position: "absolute", left: 39, top: 40, bottom: 40,
+                                width: 2,
+                                background: "linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent)",
+                                zIndex: 0,
+                            }}
+                        />
+                    )}
+
                     {steps.map((step, i) => (
-                        <div key={step.num} className={`glass-card ${isMobile ? "" : "process-card"}`} style={{
-                            padding: "2rem 1.5rem",
-                            minWidth: isMobile ? "auto" : 320, maxWidth: isMobile ? "none" : 360,
-                            flexShrink: 0,
-                        }}>
-                            <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>{step.emoji}</div>
-                            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
-                                <span style={{ fontSize: "0.65rem", fontWeight: 700, color: "var(--accent)", fontFamily: "'JetBrains Mono', monospace" }}>{step.num}</span>
-                                <h3 className="font-display" style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.01em" }}>{step.title}</h3>
+                        <div
+                            key={step.num}
+                            style={{
+                                display: "flex",
+                                gap: isMobile ? 16 : 28,
+                                position: "relative",
+                                zIndex: 1,
+                                marginBottom: i === steps.length - 1 ? 0 : 28,
+                            }}
+                        >
+                            {/* Number bubble */}
+                            <div
+                                style={{
+                                    flexShrink: 0, width: 80, height: 80, borderRadius: 20,
+                                    background: "var(--surface-solid)", border: "1px solid var(--border)",
+                                    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                                    gap: 4, boxShadow: "0 6px 24px rgba(0,0,0,0.3)",
+                                }}
+                            >
+                                <div style={{ color: "var(--accent)" }}>{step.icon}</div>
+                                <div style={{
+                                    fontSize: "0.66rem", fontWeight: 700, color: "var(--text-faint)",
+                                    fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.05em",
+                                }}>
+                                    STEP {step.num}
+                                </div>
                             </div>
-                            <p style={{ fontSize: "0.875rem", color: "var(--text-subtle)", lineHeight: 1.7, marginBottom: "1.25rem" }}>{step.desc}</p>
-                            <div style={{
-                                fontSize: "0.7rem", color: "var(--accent)", fontWeight: 600,
-                                padding: "0.4rem 0.75rem", background: "var(--tag-bg)", borderRadius: 8, border: "1px solid var(--tag-border)",
-                                display: "inline-block", fontFamily: "'JetBrains Mono', monospace",
-                            }}>↳ {step.deliverable}</div>
+
+                            {/* Content card */}
+                            <div className="glass-card" style={{ flex: 1, padding: isMobile ? "1.5rem 1.25rem" : "1.85rem 2rem", minWidth: 0 }}>
+                                <h3
+                                    className="font-display"
+                                    style={{
+                                        fontSize: isMobile ? "1.35rem" : "1.6rem",
+                                        fontWeight: 700, color: "var(--text)",
+                                        letterSpacing: "-0.02em", marginBottom: 10,
+                                    }}
+                                >
+                                    {step.title}
+                                </h3>
+                                <p style={{ fontSize: "1.05rem", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: 16 }}>
+                                    {step.desc}
+                                </p>
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                                    {step.deliverables.map((d) => (
+                                        <span key={d} className="tag" style={{ fontSize: "0.78rem" }}>{d}</span>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     ))}
+                </div>
+
+                {/* CTA */}
+                <div style={{ textAlign: "center", marginTop: "3.5rem" }}>
+                    <a href="/contact" className="btn-primary">
+                        Start with a Discovery Call <ArrowRight size={15} />
+                    </a>
                 </div>
             </div>
         </section>

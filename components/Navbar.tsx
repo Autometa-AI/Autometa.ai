@@ -1,23 +1,28 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Home } from "lucide-react";
-import gsap from "gsap";
-import ThemeToggle from "./ThemeToggle";
+import { ChevronDown, ArrowRight, X } from "lucide-react";
 
-const navLinks = [
-    { label: "Services", href: "/services" },
+const servicesDropdown = [
+    { label: "Lead Management Systems", href: "/services" },
+    { label: "CRM Setup & Optimization", href: "/services" },
+    { label: "Workflow Automation", href: "/services" },
+    { label: "AI Integrations", href: "/services" },
+    { label: "Custom Dashboards", href: "/services" },
+    { label: "Internal Tools", href: "/services" },
+];
+
+const resourcesDropdown = [
+    { label: "Blog", href: "/blog" },
+    { label: "Playbooks & Templates", href: "/resources" },
+    { label: "Automation Guides", href: "/resources" },
     { label: "Case Studies", href: "/case-studies" },
-    { label: "Resources", href: "/resources" },
-    { label: "About", href: "/about" },
 ];
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const linksRef = useRef<HTMLDivElement>(null);
+    const [showBanner, setShowBanner] = useState(true);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 32);
@@ -25,87 +30,109 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    useEffect(() => {
-        if (!linksRef.current) return;
-        const links = linksRef.current.querySelectorAll(".nav-link");
-        gsap.fromTo(links, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, delay: 0.3, ease: "power2.out" });
-    }, []);
-
     return (
-        <motion.header
-            initial={{ y: -60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-                position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-                background: scrolled ? "var(--surface)" : "transparent",
-                borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-                backdropFilter: scrolled ? "blur(24px) saturate(1.6)" : "none",
-                WebkitBackdropFilter: scrolled ? "blur(24px) saturate(1.6)" : "none",
-                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-        >
-            <nav className="container-wide" style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <a href="#hero" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-                    <motion.div
-                        whileHover={{ scale: 1.08 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                        style={{
-                            width: 32, height: 32, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center",
-                            background: "var(--accent)", boxShadow: "0 2px 12px var(--glow-primary)",
-                        }}
+        <>
+            {/* Announcement Bar */}
+            {showBanner && (
+                <div className="announcement-bar">
+                    <span className="announcement-badge">NEW</span>
+                    <span>The 2026 AI for Real Estate Agencies Playbook — Free Download</span>
+                    <a href="/resources" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                        Get it now <ArrowRight size={12} />
+                    </a>
+                    <button
+                        onClick={() => setShowBanner(false)}
+                        style={{ position: "absolute", right: 16, background: "none", border: "none", color: "#fff", cursor: "pointer", opacity: 0.7 }}
                     >
-                        <Home size={15} color="#fff" />
-                    </motion.div>
-                    <span className="font-display" style={{ fontWeight: 700, fontSize: "1.05rem", color: "var(--text)", letterSpacing: "-0.03em" }}>autometa</span>
-                </a>
-
-                <div ref={linksRef} style={{ display: "flex", alignItems: "center", gap: 28 }} className="hidden-mobile">
-                    {navLinks.map(link => (
-                        <a key={link.label} href={link.href} className="nav-link"
-                            style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--text-muted)", textDecoration: "none", position: "relative", opacity: 0 }}>
-                            {link.label}
-                            <span className="nav-underline" />
-                        </a>
-                    ))}
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden-mobile">
-                    <ThemeToggle />
-                    <motion.a href="/contact" className="btn-primary" style={{ fontSize: "0.8rem", padding: "0.5rem 1.25rem" }}
-                        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                        Book Free Audit
-                    </motion.a>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }} className="show-mobile">
-                    <ThemeToggle />
-                    <button onClick={() => setMobileOpen(!mobileOpen)}
-                        style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)" }}>
-                        {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+                        <X size={14} />
                     </button>
                 </div>
-            </nav>
+            )}
 
-            <AnimatePresence>
-                {mobileOpen && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)", backdropFilter: "blur(24px)" }}>
-                        <div style={{ padding: "1rem 2rem", display: "flex", flexDirection: "column", gap: 12 }}>
-                            {navLinks.map((link, i) => (
-                                <motion.a key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
-                                    initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.05, duration: 0.3 }}
-                                    style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "0.9375rem" }}>
-                                    {link.label}
-                                </motion.a>
-                            ))}
-                            <a href="/contact" className="btn-primary" style={{ marginTop: 4, justifyContent: "center" }}>Book Free Audit</a>
+            {/* Main Header */}
+            <header
+                style={{
+                    position: "sticky", top: 0, left: 0, right: 0, zIndex: 50,
+                    background: scrolled ? "var(--surface)" : "rgba(5,5,5,0.85)",
+                    borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+                    backdropFilter: "blur(24px) saturate(1.6)",
+                    WebkitBackdropFilter: "blur(24px) saturate(1.6)",
+                    transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+            >
+                <nav className="container-wide" style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    {/* Logo */}
+                    <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+                        <div
+                            style={{
+                                width: 32, height: 32, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center",
+                                background: "var(--accent)", boxShadow: "0 2px 12px var(--glow-primary)",
+                                fontSize: "0.85rem", fontWeight: 800, color: "#fff", fontFamily: "'Space Grotesk', sans-serif",
+                            }}
+                        >
+                            A
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.header>
+                        <span className="font-display" style={{ fontWeight: 700, fontSize: "1.15rem", color: "var(--text)", letterSpacing: "-0.03em" }}>autometa</span>
+                        <span style={{ fontSize: "0.7rem", marginLeft: -4, marginTop: -8, opacity: 0.5 }}>🇦🇪</span>
+                    </a>
+
+                    {/* Nav Links — desktop only */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 28 }} className="hidden-mobile">
+                        {/* Services Dropdown */}
+                        <div className="nav-item" style={{ position: "relative" }}>
+                            <span className="nav-link" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--text-muted)", cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+                                Services <ChevronDown size={12} />
+                            </span>
+                            <div className="nav-dropdown">
+                                {servicesDropdown.map(item => (
+                                    <a key={item.label} href={item.href}>{item.label}</a>
+                                ))}
+                            </div>
+                        </div>
+
+                        <a href="/case-studies" className="nav-link"
+                            style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--text-muted)", textDecoration: "none", position: "relative" }}>
+                            Case Studies
+                            <span className="nav-underline" />
+                        </a>
+
+                        <a href="/about" className="nav-link"
+                            style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--text-muted)", textDecoration: "none", position: "relative" }}>
+                            About
+                            <span className="nav-underline" />
+                        </a>
+
+                        {/* Resources Dropdown */}
+                        <div className="nav-item" style={{ position: "relative" }}>
+                            <span className="nav-link" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--text-muted)", cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+                                Resources <ChevronDown size={12} />
+                            </span>
+                            <div className="nav-dropdown">
+                                {resourcesDropdown.map(item => (
+                                    <a key={item.label} href={item.href}>{item.label}</a>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Side Buttons — desktop */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden-mobile">
+                        <a href="/resources" className="btn-outline" style={{ fontSize: "0.82rem", padding: "0.5rem 1rem" }}>
+                            Free Playbook
+                        </a>
+                        <a href="/contact" className="btn-primary" style={{ fontSize: "0.82rem", padding: "0.5rem 1.25rem" }}>
+                            Book Audit
+                        </a>
+                    </div>
+
+                    {/* Mobile: just Book Audit button, no hamburger */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }} className="show-mobile">
+                        <a href="/contact" className="btn-primary" style={{ fontSize: "0.82rem", padding: "0.5rem 1rem" }}>
+                            Book Audit
+                        </a>
+                    </div>
+                </nav>
+            </header>
+        </>
     );
 }

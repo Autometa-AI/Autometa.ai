@@ -1,105 +1,263 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { ArrowRight, Users, Database, Workflow, Bot, BarChart3, Wrench } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+    ArrowRight,
+    Users,
+    Database,
+    Workflow,
+    Bot,
+    BarChart3,
+    Wrench,
+    Settings,
+    Zap,
+    Code,
+} from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+type Service = {
+    icon: React.ReactNode;
+    title: string;
+    desc: string;
+    features: string[];
+    accent: string;
+};
 
-const services = [
-    { icon: <Users size={20} />, number: "01", title: "Lead Management Systems", description: "Centralized lead capture from all sources. Track, score, and route leads automatically so your team focuses on the hottest opportunities.", tags: ["Lead Capture", "Pipeline Tracking", "Auto-Routing", "Scoring"] },
-    { icon: <Database size={20} />, number: "02", title: "CRM Setup & Optimization", description: "Implement and optimize your CRM with structured workflows, automated data entry, and full pipeline visibility from first touch to close.", tags: ["CRM Setup", "Data Sync", "Pipeline Views", "Reporting"] },
-    { icon: <Workflow size={20} />, number: "03", title: "Workflow Automation", description: "Automate follow-ups, task assignments, notifications, and handoffs. Eliminate manual work and ensure nothing falls through the cracks.", tags: ["Auto Follow-ups", "Task Triggers", "Notifications", "Handoffs"] },
-    { icon: <Bot size={20} />, number: "04", title: "AI Integrations", description: "AI-powered responses on WhatsApp, email, and SMS. Intelligent lead qualification, sentiment analysis, and predictive scoring.", tags: ["AI Responses", "WhatsApp Bot", "Lead Scoring", "Smart Routing"] },
-    { icon: <BarChart3 size={20} />, number: "05", title: "Custom Dashboards", description: "Real-time dashboards that show pipeline health, agent performance, conversion rates, and revenue forecasts at a glance.", tags: ["Real-Time Data", "Agent KPIs", "Conversion Tracking", "Forecasting"] },
-    { icon: <Wrench size={20} />, number: "06", title: "Internal Tools", description: "Custom-built tools for your specific workflows — inventory trackers, commission calculators, document generators, and more.", tags: ["Custom Tools", "Inventory", "Calculators", "Doc Gen"] },
+type Category = {
+    id: string;
+    eyebrow: string;
+    title: string;
+    tagline: string;
+    items: Service[];
+};
+
+const categories: Category[] = [
+    {
+        id: "systems",
+        eyebrow: "01 / Core Systems",
+        title: "Systems That Capture Every Lead",
+        tagline: "Centralized pipelines, structured data, and full visibility — so no opportunity slips away.",
+        items: [
+            {
+                icon: <Users size={24} />,
+                title: "Lead Management Systems",
+                desc: "Every lead from every channel — WhatsApp, calls, portals, Meta ads — captured and scored in a single pipeline.",
+                features: ["Multi-channel capture", "Auto-routing", "Lead scoring", "SLA alerts"],
+                accent: "#ff6b35",
+            },
+            {
+                icon: <Database size={24} />,
+                title: "CRM Setup & Optimization",
+                desc: "Your CRM, configured around your exact workflow. Structured deal stages, automated data entry, clean reporting.",
+                features: ["CRM implementation", "Data migration", "Pipeline design", "Custom fields"],
+                accent: "#3b82f6",
+            },
+            {
+                icon: <BarChart3 size={24} />,
+                title: "Custom Dashboards",
+                desc: "Real-time dashboards that show pipeline health, agent performance, and revenue forecasts at a glance.",
+                features: ["Live KPIs", "Agent leaderboards", "Forecasting", "Exec reports"],
+                accent: "#22c55e",
+            },
+        ],
+    },
+    {
+        id: "ai",
+        eyebrow: "02 / AI & Automation",
+        title: "AI That Works While You Sleep",
+        tagline: "Intelligent responses, smart routing, and workflows that never miss a beat.",
+        items: [
+            {
+                icon: <Bot size={24} />,
+                title: "AI Integrations",
+                desc: "GPT-powered responses on WhatsApp, email, and SMS. Qualify leads, schedule viewings, and answer questions 24/7.",
+                features: ["WhatsApp AI bot", "Email auto-replies", "Lead qualification", "Smart routing"],
+                accent: "#a855f7",
+            },
+            {
+                icon: <Workflow size={24} />,
+                title: "Workflow Automation",
+                desc: "Automate follow-ups, task handoffs, document generation, and notifications. Let systems handle the busywork.",
+                features: ["Drip sequences", "Task triggers", "Doc automation", "Handoff rules"],
+                accent: "#f59e0b",
+            },
+            {
+                icon: <Zap size={24} />,
+                title: "Smart Triggers",
+                desc: "Event-driven automations that fire the moment something happens — a new lead, a viewing booked, a deal stalled.",
+                features: ["Webhooks", "Real-time triggers", "Conditional logic", "Multi-step flows"],
+                accent: "#ec4899",
+            },
+        ],
+    },
+    {
+        id: "custom",
+        eyebrow: "03 / Custom Development",
+        title: "Custom Tools, Built For Your Workflow",
+        tagline: "When off-the-shelf won't cut it, we build exactly what your team needs.",
+        items: [
+            {
+                icon: <Wrench size={24} />,
+                title: "Internal Tools",
+                desc: "Custom-built tools for your unique workflows — inventory trackers, deal rooms, commission calculators, doc generators.",
+                features: ["Bespoke UI", "Role-based access", "Fast iterations", "Full ownership"],
+                accent: "#ff6b35",
+            },
+            {
+                icon: <Code size={24} />,
+                title: "Custom Development",
+                desc: "Full-stack builds when you need something no CRM or SaaS can give you — portals, apps, integrations, APIs.",
+                features: ["Web apps", "Mobile apps", "API integrations", "Database design"],
+                accent: "#3b82f6",
+            },
+            {
+                icon: <Settings size={24} />,
+                title: "System Integrations",
+                desc: "Connect everything: CRMs, portals, phone systems, payment processors, ad platforms. One unified flow.",
+                features: ["Portal sync", "Call tracking", "Payment hooks", "Ad platforms"],
+                accent: "#22c55e",
+            },
+        ],
+    },
 ];
 
-function TiltCard({ children }: { children: React.ReactNode }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [2, -2]), { stiffness: 300, damping: 30 });
-    const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-2, 2]), { stiffness: 300, damping: 30 });
-
-    function handleMouse(e: React.MouseEvent) {
-        const rect = ref.current?.getBoundingClientRect();
-        if (!rect) return;
-        x.set((e.clientX - rect.left) / rect.width - 0.5);
-        y.set((e.clientY - rect.top) / rect.height - 0.5);
-    }
-    function resetMouse() { x.set(0); y.set(0); }
-
-    return (
-        <motion.div ref={ref} onMouseMove={handleMouse} onMouseLeave={resetMouse}
-            style={{ rotateX, rotateY, transformPerspective: 800, transformStyle: "preserve-3d" }}>
-            {children}
-        </motion.div>
-    );
-}
-
 export default function ServicesSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
 
-    useEffect(() => {
-        if (!containerRef.current) return;
-        const cards = containerRef.current.querySelectorAll(".service-card");
-        gsap.set(cards, { opacity: 0, y: 30 });
-        ScrollTrigger.batch(cards, {
-            onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power3.out", overwrite: true }),
-            start: "top 90%",
-        });
-        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-    }, []);
-
     return (
-        <section id="services" style={{ padding: "6rem 0", position: "relative" }}>
+        <section id="services" style={{ padding: "6rem 0 7rem", position: "relative" }}>
             <div className="container-wide">
-                <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "3rem" }}>
-                    <span className="section-eyebrow">Services</span>
-                    <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-                        <h2 className="font-display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)", lineHeight: 1.1, maxWidth: 560 }}>
-                            Everything You Need for a <span className="gradient-text">High-Performance</span> Operation
-                        </h2>
-                        <motion.a href="/services" className="btn-secondary" style={{ fontSize: "0.8rem" }} whileHover={{ scale: 1.03 }}>
-                            Explore Services <ArrowRight size={13} />
-                        </motion.a>
-                    </div>
-                </motion.div>
+                {/* Header */}
+                <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 4rem" }}>
+                    <span className="section-eyebrow" style={{ justifyContent: "center" }}>Services & Solutions</span>
+                    <h2
+                        className="font-display"
+                        style={{
+                            fontSize: "clamp(2.2rem, 4.2vw, 3.25rem)",
+                            fontWeight: 700,
+                            letterSpacing: "-0.035em",
+                            color: "var(--text)",
+                            lineHeight: 1.08,
+                            marginBottom: 16,
+                        }}
+                    >
+                        Everything You Need to <span className="gradient-text">Scale Your Agency</span>
+                    </h2>
+                    <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
+                        Three categories of services — built together or independently — that turn your agency into a high-performance machine.
+                    </p>
+                </div>
 
-                <div ref={containerRef} style={{
-                    display: "grid",
-                    gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-                    gap: 12,
-                }}>
-                    {services.map((s) => (
-                        <TiltCard key={s.title}>
-                            <div className="service-card glass-card" style={{ padding: "1.5rem", cursor: "default", height: "100%" }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                {/* Categories */}
+                <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 56 : 72 }}>
+                    {categories.map((cat) => (
+                        <div key={cat.id}>
+                            {/* Category header */}
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: isMobile ? "1fr" : "0.9fr 1.1fr",
+                                    gap: isMobile ? 16 : 40,
+                                    alignItems: "end",
+                                    marginBottom: isMobile ? 24 : 32,
+                                    paddingBottom: 20,
+                                    borderBottom: "1px solid var(--border)",
+                                }}
+                            >
+                                <div>
                                     <div style={{
-                                        width: 36, height: 36, borderRadius: 10,
-                                        background: "var(--tag-bg)", border: "1px solid var(--tag-border)",
-                                        display: "flex", alignItems: "center", justifyContent: "center",
-                                        color: "var(--accent)",
+                                        fontSize: "0.78rem", fontWeight: 700, color: "var(--accent)",
+                                        fontFamily: "'JetBrains Mono', monospace",
+                                        letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10,
                                     }}>
-                                        {s.icon}
+                                        {cat.eyebrow}
                                     </div>
-                                    <span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-faint)", fontFamily: "'JetBrains Mono', monospace" }}>{s.number}</span>
+                                    <h3
+                                        className="font-display"
+                                        style={{
+                                            fontSize: isMobile ? "1.8rem" : "clamp(1.95rem, 2.8vw, 2.5rem)",
+                                            fontWeight: 700, color: "var(--text)",
+                                            letterSpacing: "-0.025em", lineHeight: 1.1,
+                                        }}
+                                    >
+                                        {cat.title}
+                                    </h3>
                                 </div>
-                                <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--text)", marginBottom: 8, letterSpacing: "-0.01em" }}>{s.title}</h3>
-                                <p style={{ fontSize: "0.875rem", color: "var(--text-subtle)", lineHeight: 1.7, marginBottom: 12 }}>{s.description}</p>
-                                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                                    {s.tags.map(t => (
-                                        <motion.span key={t} className="tag" whileHover={{ scale: 1.06 }}>{t}</motion.span>
-                                    ))}
-                                </div>
+                                <p style={{ fontSize: "1.1rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
+                                    {cat.tagline}
+                                </p>
                             </div>
-                        </TiltCard>
+
+                            {/* Individual service cards — full-width stacked */}
+                            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                                {cat.items.map((item) => (
+                                    <a
+                                        key={item.title}
+                                        href="/services"
+                                        className="glass-card"
+                                        style={{
+                                            padding: isMobile ? "1.5rem" : "2rem 2.25rem",
+                                            display: "grid",
+                                            gridTemplateColumns: isMobile ? "1fr" : "auto 1fr auto",
+                                            gap: isMobile ? 16 : 24,
+                                            alignItems: "center",
+                                            textDecoration: "none",
+                                            color: "inherit",
+                                            cursor: "pointer",
+                                        }}
+                                    >
+                                        {/* Icon */}
+                                        <div
+                                            style={{
+                                                width: 56, height: 56, borderRadius: 16,
+                                                background: `${item.accent}14`,
+                                                border: `1px solid ${item.accent}30`,
+                                                display: "flex", alignItems: "center", justifyContent: "center",
+                                                color: item.accent, flexShrink: 0,
+                                            }}
+                                        >
+                                            {item.icon}
+                                        </div>
+
+                                        {/* Content */}
+                                        <div style={{ minWidth: 0 }}>
+                                            <h4
+                                                className="font-display"
+                                                style={{
+                                                    fontSize: isMobile ? "1.2rem" : "1.35rem",
+                                                    fontWeight: 700, color: "var(--text)",
+                                                    letterSpacing: "-0.015em", marginBottom: 6,
+                                                }}
+                                            >
+                                                {item.title}
+                                            </h4>
+                                            <p style={{ fontSize: "1rem", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 10 }}>
+                                                {item.desc}
+                                            </p>
+                                            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                                                {item.features.map((f) => (
+                                                    <span key={f} className="tag" style={{ fontSize: "0.72rem" }}>{f}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Arrow */}
+                                        {!isMobile && (
+                                            <div style={{ color: "var(--text-faint)", flexShrink: 0 }}>
+                                                <ArrowRight size={20} />
+                                            </div>
+                                        )}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
                     ))}
+                </div>
+
+                {/* Footer CTA */}
+                <div style={{ textAlign: "center", marginTop: "4rem" }}>
+                    <a href="/services" className="btn-primary">
+                        Explore All Services <ArrowRight size={15} />
+                    </a>
                 </div>
             </div>
         </section>

@@ -165,7 +165,7 @@ export default function CaseStudiesPage() {
                         <p style={{ fontSize: "0.95rem", color: "var(--text-subtle)", lineHeight: 1.7, marginBottom: 28 }}>
                             Tools are commodities. What matters is how they connect, automate, and work together as a system. That&apos;s what we build.
                         </p>
-                        <a href="/contact" className="btn-primary">Book Free Audit <ArrowRight size={14} /></a>
+                        <a href="/contact" className="btn-primary">Book Audit <ArrowRight size={14} /></a>
                     </motion.div>
                 </div>
             </section>

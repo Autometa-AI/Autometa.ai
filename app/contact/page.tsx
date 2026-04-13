@@ -107,7 +107,7 @@ export default function ContactPage() {
                                         style={{ ...inputStyle, resize: "vertical" }}
                                     />
                                     <button type="submit" className="btn-primary" style={{ width: "100%", justifyContent: "center", marginTop: 4 }}>
-                                        Book Free Audit <ArrowRight size={14} />
+                                        Book Audit <ArrowRight size={14} />
                                     </button>
                                     <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", marginTop: 4 }}>
                                         {["Free audit", "No obligation", "Same-day response"].map(t => (
