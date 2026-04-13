@@ -120,10 +120,10 @@ export default function CaseStudiesPage() {
 
                             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: 16, marginBottom: 24 }}>
                                 {[
-                                    { label: "Problem", text: cs.problem, color: "#ef4444" },
-                                    { label: "Discovery", text: cs.discovery, color: "#f59e0b" },
-                                    { label: "Design", text: cs.design, color: "#3b82f6" },
-                                    { label: "Execution", text: cs.execution, color: "#22c55e" },
+                                    { label: "Problem", text: cs.problem, color: "#0066FF" },
+                                    { label: "Discovery", text: cs.discovery, color: "#E6E6E6" },
+                                    { label: "Design", text: cs.design, color: "#0066FF" },
+                                    { label: "Execution", text: cs.execution, color: "#66F2FF" },
                                 ].map(phase => (
                                     <div key={phase.label}>
                                         <div style={{ fontSize: "0.7rem", fontWeight: 700, color: phase.color, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6, fontFamily: "'JetBrains Mono', monospace" }}>

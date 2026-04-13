@@ -98,8 +98,8 @@ export default function ResourcesPage() {
                                 animate={{ opacity: 1, y: 0 }}
                             >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 32 }}>
-                                    <CheckCircle size={18} style={{ color: "#22c55e" }} />
-                                    <span style={{ fontSize: "0.9rem", fontWeight: 600, color: "#22c55e" }}>Resources unlocked! Download any resource below.</span>
+                                    <CheckCircle size={18} style={{ color: "#66F2FF" }} />
+                                    <span style={{ fontSize: "0.9rem", fontWeight: 600, color: "#66F2FF" }}>Resources unlocked! Download any resource below.</span>
                                 </div>
                                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 16 }}>
                                     {resources.map((r, i) => (

@@ -23,7 +23,7 @@ const blogs: Card[] = [
         desc: "A practical framework for agency founders to assess where their operations stand — and why most get stuck at Level 2.",
         icon: <TrendingUp size={18} />,
         tag: "5 min read",
-        gradient: "linear-gradient(135deg, #ff6b35 0%, #f59e0b 100%)",
+        gradient: "linear-gradient(135deg, #00CFFF 0%, #0066FF 100%)",
     },
     {
         category: "Lead Management",
@@ -31,7 +31,7 @@ const blogs: Card[] = [
         desc: "The exact structure top-performing agencies use to route, score, and follow up on every lead within 60 seconds.",
         icon: <Workflow size={18} />,
         tag: "7 min read",
-        gradient: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
+        gradient: "linear-gradient(135deg, #0066FF 0%, #66F2FF 100%)",
     },
     {
         category: "AI Technology",
@@ -39,7 +39,7 @@ const blogs: Card[] = [
         desc: "Real examples of how AI-powered chat is qualifying leads, booking viewings, and closing deals 24/7 for UAE agencies.",
         icon: <Zap size={18} />,
         tag: "6 min read",
-        gradient: "linear-gradient(135deg, #22c55e 0%, #3b82f6 100%)",
+        gradient: "linear-gradient(135deg, #66F2FF 0%, #0066FF 100%)",
     },
     {
         category: "Strategy",
@@ -47,7 +47,7 @@ const blogs: Card[] = [
         desc: "A 40-page deep-dive into the tools, tactics, and systems your agency needs to stay ahead in the next 12 months.",
         icon: <BookOpen size={18} />,
         tag: "40+ pages",
-        gradient: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
+        gradient: "linear-gradient(135deg, #C0C0C0 0%, #E6E6E6 100%)",
     },
 ];
 
@@ -58,7 +58,7 @@ const resources: Card[] = [
         desc: "Proven sequences used by top UAE real estate teams. Copy, paste, adapt. Free.",
         icon: <FileText size={18} />,
         tag: "24 templates",
-        gradient: "linear-gradient(135deg, #ff6b35 0%, #ec4899 100%)",
+        gradient: "linear-gradient(135deg, #00CFFF 0%, #E6E6E6 100%)",
     },
     {
         category: "Blueprints",
@@ -66,7 +66,7 @@ const resources: Card[] = [
         desc: "Step-by-step Notion template for building your own lead capture and routing system.",
         icon: <Layout size={18} />,
         tag: "Notion template",
-        gradient: "linear-gradient(135deg, #3b82f6 0%, #22c55e 100%)",
+        gradient: "linear-gradient(135deg, #0066FF 0%, #66F2FF 100%)",
     },
     {
         category: "Playbooks",
@@ -74,7 +74,7 @@ const resources: Card[] = [
         desc: "Plug-and-play Make.com and Zapier recipes for common real estate operations.",
         icon: <Workflow size={18} />,
         tag: "12 workflows",
-        gradient: "linear-gradient(135deg, #f59e0b 0%, #a855f7 100%)",
+        gradient: "linear-gradient(135deg, #0066FF 0%, #C0C0C0 100%)",
     },
 ];
 

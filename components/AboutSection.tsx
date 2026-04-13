@@ -28,10 +28,10 @@ const pillars = [
 ];
 
 const pipeline = [
-    { step: "01", label: "Data Ingestion", color: "#00d4ff" },
-    { step: "02", label: "AI Processing", color: "#0ea5e9" },
-    { step: "03", label: "Decision Engine", color: "#7c3aed" },
-    { step: "04", label: "Action Output", color: "#00f5d4" },
+    { step: "01", label: "Data Ingestion", color: "#00CFFF" },
+    { step: "02", label: "AI Processing", color: "#0066FF" },
+    { step: "03", label: "Decision Engine", color: "#66F2FF" },
+    { step: "04", label: "Action Output", color: "#E6E6E6" },
 ];
 
 export default function AboutSection() {
@@ -56,12 +56,12 @@ export default function AboutSection() {
                             Built by Engineers.{" "}
                             <span className="gradient-text">Driven by Intelligence.</span>
                         </h2>
-                        <p className="text-[#94a3b8] text-lg leading-relaxed mb-6">
+                        <p className="text-[#C0C0C0] text-lg leading-relaxed mb-6">
                             Autometa was founded by a team of robotics engineers, AI researchers, and
                             enterprise architects with a singular mission: to make intelligent automation
                             accessible, reliable, and transformative for every organization.
                         </p>
-                        <p className="text-[#94a3b8] leading-relaxed mb-8">
+                        <p className="text-[#C0C0C0] leading-relaxed mb-8">
                             We don&apos;t sell software. We engineer systems. Every engagement begins
                             with deep process discovery, culminating in precision-built automation
                             that creates lasting operational advantage.
@@ -77,9 +77,9 @@ export default function AboutSection() {
                                     transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
                                     className="glass glass-hover p-4 rounded-xl"
                                 >
-                                    <p.icon className="w-5 h-5 text-[#00d4ff] mb-2 icon-glow" />
+                                    <p.icon className="w-5 h-5 text-[#00CFFF] mb-2 icon-glow" />
                                     <h4 className="text-sm font-bold mb-1">{p.title}</h4>
-                                    <p className="text-xs text-[#94a3b8] leading-relaxed">{p.desc}</p>
+                                    <p className="text-xs text-[#C0C0C0] leading-relaxed">{p.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -94,13 +94,13 @@ export default function AboutSection() {
                     >
                         <div
                             className="glass rounded-2xl p-8 relative overflow-hidden"
-                            style={{ border: "1px solid rgba(0,212,255,0.15)" }}
+                            style={{ border: "1px solid rgba(0,207,255,0.15)" }}
                         >
                             {/* Background glow */}
                             <div
                                 className="absolute inset-0 opacity-5 pointer-events-none"
                                 style={{
-                                    background: "radial-gradient(circle at 60% 40%, #00d4ff, transparent 60%)",
+                                    background: "radial-gradient(circle at 60% 40%, #00CFFF, transparent 60%)",
                                 }}
                             />
 
@@ -152,7 +152,7 @@ export default function AboutSection() {
                             </div>
 
                             {/* Bottom info */}
-                            <div className="mt-8 pt-6 border-t border-[rgba(0,212,255,0.1)] grid grid-cols-3 gap-4">
+                            <div className="mt-8 pt-6 border-t border-[rgba(0,207,255,0.1)] grid grid-cols-3 gap-4">
                                 {[
                                     { value: "< 50ms", label: "Latency" },
                                     { value: "99.9%", label: "Uptime SLA" },
@@ -160,7 +160,7 @@ export default function AboutSection() {
                                 ].map((m) => (
                                     <div key={m.label} className="text-center">
                                         <div className="text-lg font-black gradient-text">{m.value}</div>
-                                        <div className="text-xs text-[#475569] mt-0.5">{m.label}</div>
+                                        <div className="text-xs text-[#6E6E6E] mt-0.5">{m.label}</div>
                                     </div>
                                 ))}
                             </div>

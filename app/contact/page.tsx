@@ -126,7 +126,7 @@ export default function ContactPage() {
                             style={{ textAlign: "center", maxWidth: 500, margin: "0 auto" }}
                         >
                             <div className="glass-card" style={{ padding: "3rem 2rem" }}>
-                                <CheckCircle size={48} style={{ color: "#22c55e", margin: "0 auto 16px", display: "block" }} />
+                                <CheckCircle size={48} style={{ color: "#66F2FF", margin: "0 auto 16px", display: "block" }} />
                                 <h2 className="font-display" style={{ fontSize: "1.5rem", fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>
                                     You&apos;re Booked!
                                 </h2>

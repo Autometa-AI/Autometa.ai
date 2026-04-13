@@ -29,7 +29,7 @@ const slides: Slide[] = [
         id: "lead",
         title: "Lead Intelligence Dashboard",
         caption: "Live pipeline view with AI-scored leads across every channel.",
-        accent: "#ff6b35",
+        accent: "#00CFFF",
         render: () => (
             <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
@@ -45,7 +45,7 @@ const slides: Slide[] = [
                             </div>
                             <div style={{ display: "flex", alignItems: "baseline", gap: 5 }}>
                                 <span style={{ fontSize: "1.2rem", fontWeight: 800, color: "var(--text)", letterSpacing: "-0.03em" }}>{k.value}</span>
-                                <span style={{ fontSize: "0.65rem", fontWeight: 700, color: "#22c55e" }}>{k.change}</span>
+                                <span style={{ fontSize: "0.65rem", fontWeight: 700, color: "#66F2FF" }}>{k.change}</span>
                             </div>
                         </div>
                     ))}
@@ -56,9 +56,9 @@ const slides: Slide[] = [
                         <span style={{ fontSize: "0.65rem", fontWeight: 700, color: "var(--text-faint)", letterSpacing: "0.06em", textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace" }}>Automation Feed</span>
                     </div>
                     {[
-                        { action: "Lead auto-responded via WhatsApp", detail: "Sarah M. — new inquiry", dot: "#22c55e" },
+                        { action: "Lead auto-responded via WhatsApp", detail: "Sarah M. — new inquiry", dot: "#66F2FF" },
                         { action: "Follow-up triggered", detail: "John P. — Day 3 drip", dot: "var(--accent)" },
-                        { action: "Assigned to agent", detail: "Unit 7A — Score 92/100", dot: "#3b82f6" },
+                        { action: "Assigned to agent", detail: "Unit 7A — Score 92/100", dot: "#0066FF" },
                     ].map((item, i) => (
                         <div key={item.action} style={{ display: "flex", alignItems: "center", gap: 8, padding: "5px 0", borderTop: i > 0 ? "1px solid var(--border-subtle)" : "none" }}>
                             <div style={{ width: 5, height: 5, borderRadius: "50%", background: item.dot, flexShrink: 0 }} />
@@ -76,13 +76,13 @@ const slides: Slide[] = [
         id: "analytics",
         title: "Analytics & Insights",
         caption: "Conversion funnels, agent KPIs, and forecast — refreshed in real time.",
-        accent: "#22c55e",
+        accent: "#66F2FF",
         render: () => (
             <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 <div style={{ background: "var(--surface-solid)", borderRadius: 12, padding: "1rem", border: "1px solid var(--border)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                         <span style={{ fontSize: "0.67rem", fontWeight: 700, color: "var(--text-faint)", textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "'JetBrains Mono', monospace" }}>Pipeline Revenue</span>
-                        <span style={{ fontSize: "0.67rem", color: "#22c55e", fontWeight: 700 }}>+38%</span>
+                        <span style={{ fontSize: "0.67rem", color: "#66F2FF", fontWeight: 700 }}>+38%</span>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 14 }}>
                         <span className="font-display" style={{ fontSize: "1.7rem", fontWeight: 800, color: "var(--text)", letterSpacing: "-0.03em" }}>$8.2M</span>
@@ -96,7 +96,7 @@ const slides: Slide[] = [
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                     <div style={{ background: "var(--surface-solid)", borderRadius: 10, padding: "0.7rem", border: "1px solid var(--border)" }}>
-                        <TrendingUp size={13} style={{ color: "#22c55e", marginBottom: 4 }} />
+                        <TrendingUp size={13} style={{ color: "#66F2FF", marginBottom: 4 }} />
                         <div style={{ fontSize: "1.05rem", fontWeight: 800, color: "var(--text)", letterSpacing: "-0.02em" }}>41%</div>
                         <div style={{ fontSize: "0.62rem", color: "var(--text-faint)" }}>Close Rate</div>
                     </div>
@@ -113,16 +113,16 @@ const slides: Slide[] = [
         id: "ai",
         title: "AI-Powered Automations",
         caption: "Intelligent responses on WhatsApp, email and SMS — 24/7.",
-        accent: "#3b82f6",
+        accent: "#0066FF",
         render: () => (
             <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 <div style={{ background: "var(--surface-solid)", borderRadius: 12, padding: "1rem", border: "1px solid var(--border)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
-                        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <MessageSquare size={11} style={{ color: "#22c55e" }} />
+                        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(102,242,255,0.15)", border: "1px solid rgba(102,242,255,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <MessageSquare size={11} style={{ color: "#66F2FF" }} />
                         </div>
                         <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text)" }}>WhatsApp Bot</div>
-                        <span style={{ marginLeft: "auto", fontSize: "0.58rem", color: "#22c55e", fontWeight: 700 }}>● LIVE</span>
+                        <span style={{ marginLeft: "auto", fontSize: "0.58rem", color: "#66F2FF", fontWeight: 700 }}>● LIVE</span>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                         <div style={{ alignSelf: "flex-start", maxWidth: "82%", background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "7px 11px", fontSize: "0.67rem", color: "var(--text-secondary)" }}>Hi, interested in Unit 7A. Is it available?</div>
@@ -136,7 +136,7 @@ const slides: Slide[] = [
                         <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text)" }}>Meeting auto-scheduled</div>
                         <div style={{ fontSize: "0.62rem", color: "var(--text-faint)" }}>Tomorrow · 2:00 PM · Unit 7A</div>
                     </div>
-                    <div style={{ fontSize: "0.58rem", fontWeight: 700, color: "#22c55e" }}>+1 LEAD</div>
+                    <div style={{ fontSize: "0.58rem", fontWeight: 700, color: "#66F2FF" }}>+1 LEAD</div>
                 </div>
             </div>
         ),
@@ -145,16 +145,16 @@ const slides: Slide[] = [
         id: "systems",
         title: "Custom Internal Tools",
         caption: "Tailored CRMs, commission calculators, and deal rooms.",
-        accent: "#f59e0b",
+        accent: "#C0C0C0",
         render: () => (
             <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 <div style={{ background: "var(--surface-solid)", borderRadius: 12, padding: "1rem", border: "1px solid var(--border)" }}>
                     <div style={{ fontSize: "0.67rem", fontWeight: 700, color: "var(--text-faint)", textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "'JetBrains Mono', monospace", marginBottom: 10 }}>Deal Pipeline · Q4</div>
                     {[
-                        { name: "Marina Heights 12B", stage: "Closing", pct: 92, color: "#22c55e" },
+                        { name: "Marina Heights 12B", stage: "Closing", pct: 92, color: "#66F2FF" },
                         { name: "Downtown Loft 4C", stage: "Negotiating", pct: 68, color: "var(--accent)" },
-                        { name: "Palm Villa 03", stage: "Viewing", pct: 35, color: "#3b82f6" },
-                        { name: "JBR Penthouse", stage: "Qualified", pct: 18, color: "#a855f7" },
+                        { name: "Palm Villa 03", stage: "Viewing", pct: 35, color: "#0066FF" },
+                        { name: "JBR Penthouse", stage: "Qualified", pct: 18, color: "#C0C0C0" },
                     ].map((d, i) => (
                         <div key={d.name} style={{ marginTop: i > 0 ? 10 : 0 }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
@@ -253,9 +253,9 @@ export default function HeroSection() {
                             <div style={{ position: "relative" }}>
                                 <div className="dashboard-mockup" style={{ minHeight: 340 }}>
                                     <div className="dashboard-bar">
-                                        <div className="dashboard-dot" style={{ background: "#ff5f57" }} />
-                                        <div className="dashboard-dot" style={{ background: "#febc2e" }} />
-                                        <div className="dashboard-dot" style={{ background: "#28c840" }} />
+                                        <div className="dashboard-dot" style={{ background: "#6E6E6E" }} />
+                                        <div className="dashboard-dot" style={{ background: "#9A9A9A" }} />
+                                        <div className="dashboard-dot" style={{ background: "#C0C0C0" }} />
                                         <span style={{ marginLeft: 12, fontSize: "0.7rem", color: "var(--text-faint)", fontWeight: 500, fontFamily: "'JetBrains Mono', monospace" }}>
                                             autometa.app/{slide.id}
                                         </span>

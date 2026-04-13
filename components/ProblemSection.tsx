@@ -31,8 +31,8 @@ const painPoints: Pain[] = [
         desc: "Leads that aren't contacted in the first 5 minutes are 21x less likely to convert. Most real estate teams respond in hours, not minutes — and their competitors close those deals instead.",
         stat: "72%",
         statLabel: "of leads go unresponded to within 1 hour",
-        gradient: "linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.02) 100%)",
-        accent: "#ef4444",
+        gradient: "linear-gradient(135deg, rgba(0,102,255,0.18) 0%, rgba(0,102,255,0.02) 100%)",
+        accent: "#0066FF",
     },
     {
         num: "02",
@@ -42,8 +42,8 @@ const painPoints: Pain[] = [
         desc: "Without a centralized pipeline, leads fall through the cracks between channels. Agents waste hours reconciling contacts. Hot prospects go cold while nobody owns the conversation.",
         stat: "$12K+",
         statLabel: "average deal value lost every month per agent",
-        gradient: "linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(245,158,11,0.02) 100%)",
-        accent: "#f59e0b",
+        gradient: "linear-gradient(135deg, rgba(0,207,255,0.18) 0%, rgba(0,207,255,0.02) 100%)",
+        accent: "#00CFFF",
     },
     {
         num: "03",
@@ -53,8 +53,8 @@ const painPoints: Pain[] = [
         desc: "Your team forgets to follow up. Leads that needed 7 touches only got 2. Sequences break when agents go on leave. Revenue leaks quietly — and you only notice at the end of the quarter.",
         stat: "48%",
         statLabel: "of salespeople never follow up after the first contact",
-        gradient: "linear-gradient(135deg, rgba(168,85,247,0.18) 0%, rgba(168,85,247,0.02) 100%)",
-        accent: "#a855f7",
+        gradient: "linear-gradient(135deg, rgba(102,242,255,0.18) 0%, rgba(102,242,255,0.02) 100%)",
+        accent: "#66F2FF",
     },
     {
         num: "04",
@@ -64,8 +64,8 @@ const painPoints: Pain[] = [
         desc: "Who's calling? Who's closing? Who's dropping the ball? Without tracking, your top performers go unrecognized and your bottom performers drag the whole pipeline down invisibly.",
         stat: "3 in 5",
         statLabel: "agency owners can't track agent performance daily",
-        gradient: "linear-gradient(135deg, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0.02) 100%)",
-        accent: "#3b82f6",
+        gradient: "linear-gradient(135deg, rgba(192,192,192,0.18) 0%, rgba(192,192,192,0.02) 100%)",
+        accent: "#C0C0C0",
     },
     {
         num: "05",
@@ -75,8 +75,8 @@ const painPoints: Pain[] = [
         desc: "Agents spend 60% of their day on admin: copying data between tools, scheduling, sending the same emails, generating the same docs. That's 60% of your payroll burned on work a bot could do.",
         stat: "10+ hrs",
         statLabel: "per week wasted by every agent on repetitive tasks",
-        gradient: "linear-gradient(135deg, rgba(236,72,153,0.18) 0%, rgba(236,72,153,0.02) 100%)",
-        accent: "#ec4899",
+        gradient: "linear-gradient(135deg, rgba(230,230,230,0.18) 0%, rgba(230,230,230,0.02) 100%)",
+        accent: "#E6E6E6",
     },
 ];
 

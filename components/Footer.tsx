@@ -88,7 +88,7 @@ export default function Footer() {
                 <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
                     <span style={{ fontSize: "0.75rem", color: "var(--text-faint)" }}>&copy; {new Date().getFullYear()} Autometa Inc.</span>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                        <div className="pulse-dot" style={{ width: 5, height: 5, borderRadius: "50%", background: "#22c55e" }} />
+                        <div className="pulse-dot" style={{ width: 5, height: 5, borderRadius: "50%", background: "#00CFFF" }} />
                         <span style={{ fontSize: "0.75rem", color: "var(--text-faint)", fontWeight: 500 }}>All systems operational</span>
                     </div>
                 </div>

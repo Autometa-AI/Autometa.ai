@@ -8,6 +8,7 @@ import ResourceHubTeaser from "@/components/ResourceHubTeaser";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
+import LeadCapturePopup from "@/components/LeadCapturePopup";
 
 export default function Home() {
     return (
@@ -25,6 +26,7 @@ export default function Home() {
                 <Footer />
             </div>
             <FloatingContact />
+            <LeadCapturePopup />
         </main>
     );
 }

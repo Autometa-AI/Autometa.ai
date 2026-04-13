@@ -14,9 +14,9 @@ type Stat = {
 
 const stats: Stat[] = [
     { value: "$8.2M+", label: "Pipeline Generated", sub: "Across all client systems", accent: "var(--accent)" },
-    { value: "15%+", label: "Savings Every Year", sub: "Operational cost reduction", accent: "#22c55e" },
-    { value: "40+", label: "Agencies Served", sub: "Across UAE & GCC", accent: "#3b82f6" },
-    { value: "14", label: "Days to Launch", sub: "From kickoff to live system", accent: "#a855f7" },
+    { value: "15%+", label: "Savings Every Year", sub: "Operational cost reduction", accent: "#66F2FF" },
+    { value: "40+", label: "Agencies Served", sub: "Across UAE & GCC", accent: "#0066FF" },
+    { value: "14", label: "Days to Launch", sub: "From kickoff to live system", accent: "#C0C0C0" },
 ];
 
 type Testimonial = {
@@ -36,7 +36,7 @@ const testimonials: Testimonial[] = [
         quote:
             "Autometa rebuilt our entire lead pipeline in 3 weeks. We went from missing half our inquiries to responding to every lead within 60 seconds. Our conversion rate doubled.",
         avatar: "NB",
-        accent: "#ff6b35",
+        accent: "#00CFFF",
     },
     {
         name: "Fatima Khalifa",
@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
         quote:
             "The AI WhatsApp bot they built handles 80% of our first-touch conversations. My agents now only talk to qualified, ready-to-buy leads. Game changer for our team.",
         avatar: "FK",
-        accent: "#3b82f6",
+        accent: "#0066FF",
     },
     {
         name: "Omar Hassan",
@@ -54,7 +54,7 @@ const testimonials: Testimonial[] = [
         quote:
             "We used to lose deals because our follow-ups were inconsistent. Autometa's automation system made sure every lead gets the right message at the right time. Pipeline is up 38%.",
         avatar: "OH",
-        accent: "#22c55e",
+        accent: "#66F2FF",
     },
 ];
 
@@ -148,14 +148,14 @@ export default function ResultsSection() {
                                 position: "relative",
                                 overflow: "hidden",
                                 minHeight: isMobile ? 200 : "auto",
-                                background: "linear-gradient(135deg, rgba(255,107,53,0.12) 0%, rgba(0,0,0,0.5) 100%)",
+                                background: "linear-gradient(135deg, rgba(0,207,255,0.12) 0%, rgba(0,0,0,0.5) 100%)",
                             }}
                         >
                             <div
                                 style={{
                                     position: "absolute", inset: 0,
                                     backgroundImage:
-                                        "radial-gradient(circle at 20% 30%, rgba(255,107,53,0.2) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15) 0%, transparent 50%)",
+                                        "radial-gradient(circle at 20% 30%, rgba(0,207,255,0.2) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(0,102,255,0.15) 0%, transparent 50%)",
                                 }}
                             />
                             <div
@@ -174,7 +174,7 @@ export default function ResultsSection() {
                                             width: 52, height: 52, borderRadius: "50%",
                                             background: "var(--accent)", border: "none", color: "#fff",
                                             display: "flex", alignItems: "center", justifyContent: "center",
-                                            cursor: "pointer", boxShadow: "0 8px 32px rgba(255,107,53,0.4)",
+                                            cursor: "pointer", boxShadow: "0 8px 32px rgba(0,207,255,0.4)",
                                         }}
                                     >
                                         <Play size={20} fill="#fff" />

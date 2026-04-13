@@ -12,21 +12,21 @@ const coreServices = [
         desc: "Centralized lead capture from all sources with automated pipeline tracking, scoring, and intelligent routing to agents.",
         features: ["Multi-channel capture", "Auto-routing", "Lead scoring", "SLA alerts"],
         outcome: "Never lose a lead again",
-        accent: "#ff6b35",
+        accent: "#00CFFF",
     },
     {
         icon: <Database size={26} />, title: "CRM Setup & Optimization",
         desc: "Your CRM, configured around your exact workflow. Structured deal stages, automated data entry, clean reporting.",
         features: ["CRM implementation", "Data migration", "Pipeline design", "Custom fields"],
         outcome: "Full pipeline visibility from day one",
-        accent: "#3b82f6",
+        accent: "#0066FF",
     },
     {
         icon: <Workflow size={26} />, title: "Workflow Automation",
         desc: "Automate follow-up sequences, task triggers, assignment rules, deadline notifications, and handoff systems.",
         features: ["Drip sequences", "Task triggers", "Doc automation", "Handoff rules"],
         outcome: "Eliminate manual repetitive work",
-        accent: "#22c55e",
+        accent: "#66F2FF",
     },
 ];
 
@@ -36,21 +36,21 @@ const aiServices = [
         desc: "Automated WhatsApp, email, and SMS responses that engage leads instantly and nurture them through your pipeline.",
         features: ["WhatsApp AI bot", "Email auto-replies", "Lead qualification", "Smart routing"],
         outcome: "Consistent, timely communication on autopilot",
-        accent: "#a855f7",
+        accent: "#C0C0C0",
     },
     {
         icon: <Phone size={26} />, title: "Communication Tracking",
         desc: "Complete logs of every call, message, and interaction — tied to each lead and deal for full accountability.",
         features: ["Call logging", "Message tracking", "Interaction history", "Full audit trail"],
         outcome: "Full visibility on every conversation",
-        accent: "#f59e0b",
+        accent: "#E6E6E6",
     },
     {
         icon: <Zap size={26} />, title: "Smart Automation",
         desc: "Behavior-based triggers that respond to lead actions — site visits, form fills, message opens — without manual intervention.",
         features: ["Webhooks", "Real-time triggers", "Conditional logic", "Multi-step flows"],
         outcome: "Self-running systems that scale with you",
-        accent: "#ec4899",
+        accent: "#0066FF",
     },
 ];
 
@@ -58,22 +58,22 @@ const customSolutions = [
     {
         icon: <BarChart3 size={26} />, label: "Custom Dashboards",
         desc: "Real-time analytics dashboards showing pipeline health, agent performance, and revenue forecasts.",
-        accent: "#ff6b35",
+        accent: "#00CFFF",
     },
     {
         icon: <Wrench size={26} />, label: "Internal Tools",
         desc: "Custom-built tools — inventory trackers, deal rooms, commission calculators, doc generators.",
-        accent: "#3b82f6",
+        accent: "#0066FF",
     },
     {
         icon: <Smartphone size={26} />, label: "Mobile Apps",
         desc: "Native mobile applications for field agents to manage leads, log visits, and close deals on the go.",
-        accent: "#22c55e",
+        accent: "#66F2FF",
     },
     {
         icon: <Link2 size={26} />, label: "Integrations",
         desc: "Connect CRMs, portals, phone systems, payment processors, and ad platforms into one unified flow.",
-        accent: "#a855f7",
+        accent: "#C0C0C0",
     },
 ];
 

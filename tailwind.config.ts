@@ -12,18 +12,15 @@ const config: Config = {
                 mono: ["JetBrains Mono", "monospace"],
             },
             colors: {
-                violet: {
-                    400: "#a78bfa",
-                    500: "#8b5cf6",
-                    600: "#7c3aed",
+                silver: {
+                    300: "#E6E6E6",
+                    400: "#C0C0C0",
+                    500: "#6E6E6E",
                 },
-                cyan: {
-                    400: "#22d3ee",
-                    500: "#06b6d4",
-                },
-                lime: {
-                    400: "#a3e635",
-                    500: "#84cc16",
+                glow: {
+                    400: "#66F2FF",
+                    500: "#00CFFF",
+                    600: "#0066FF",
                 },
             },
             borderRadius: {
