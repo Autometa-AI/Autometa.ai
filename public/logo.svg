@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Blue glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#00aaff" flood-opacity="0.6" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glowColor"/>
+      <feMerge>
+        <feMergeNode in="glowColor"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Metallic gradient for the arrow body -->
+    <linearGradient id="metalLeft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0e0e0"/>
+      <stop offset="40%" stop-color="#b0b0b0"/>
+      <stop offset="70%" stop-color="#808080"/>
+      <stop offset="100%" stop-color="#606060"/>
+    </linearGradient>
+    <linearGradient id="metalRight" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d0d0d0"/>
+      <stop offset="40%" stop-color="#a0a0a0"/>
+      <stop offset="70%" stop-color="#707070"/>
+      <stop offset="100%" stop-color="#505050"/>
+    </linearGradient>
+    <linearGradient id="metalCenter" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#c0c0c0"/>
+      <stop offset="100%" stop-color="#808080"/>
+    </linearGradient>
+    <!-- Blue line gradient -->
+    <linearGradient id="blueLine" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#0088ff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0044cc" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left wing of the arrow -->
+  <polygon points="100,30 42,140 68,130 100,88" fill="url(#metalLeft)" opacity="0.95"/>
+  <!-- Right wing of the arrow -->
+  <polygon points="100,30 158,140 132,130 100,88" fill="url(#metalRight)" opacity="0.95"/>
+  <!-- Center highlight -->
+  <polygon points="100,30 92,75 100,88 108,75" fill="url(#metalCenter)" opacity="0.9"/>
+  <!-- Bottom V connector -->
+  <polygon points="68,130 100,155 132,130 100,88" fill="url(#metalLeft)" opacity="0.85"/>
+
+  <!-- Blue vertical energy line -->
+  <line x1="100" y1="20" x2="100" y2="160" stroke="url(#blueLine)" stroke-width="1.5" filter="url(#glow)"/>
+  <!-- Blue glow at top -->
+  <circle cx="100" cy="28" r="3" fill="#00ccff" opacity="0.8" filter="url(#glow)"/>
+  <!-- Blue glow at bottom junction -->
+  <circle cx="100" cy="155" r="2.5" fill="#00aaff" opacity="0.6" filter="url(#glow)"/>
+</svg>

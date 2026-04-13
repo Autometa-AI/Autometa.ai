@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, ArrowRight, X } from "lucide-react";
 
@@ -63,16 +64,17 @@ export default function Navbar() {
                 <nav className="container-wide" style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     {/* Logo */}
                     <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-                        <div
-                            style={{
-                                width: 32, height: 32, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center",
-                                background: "var(--accent)", boxShadow: "0 2px 12px var(--glow-primary)",
-                                fontSize: "0.85rem", fontWeight: 800, color: "#fff", fontFamily: "'Space Grotesk', sans-serif",
-                            }}
-                        >
-                            A
-                        </div>
-                        <span className="font-display" style={{ fontWeight: 700, fontSize: "1.15rem", color: "var(--text)", letterSpacing: "-0.03em" }}>autometa</span>
+                        <Image
+                            src="/logo.svg"
+                            alt="Autometa AI Logo"
+                            width={34}
+                            height={34}
+                            priority
+                            style={{ filter: "drop-shadow(0 0 8px rgba(0,170,255,0.4))" }}
+                        />
+                        <span className="font-display" style={{ fontWeight: 700, fontSize: "1.15rem", color: "var(--text)", letterSpacing: "-0.03em" }}>
+                            autometa<span style={{ color: "var(--accent)", marginLeft: 4 }}>ai</span>
+                        </span>
                         <span style={{ fontSize: "0.7rem", marginLeft: -4, marginTop: -8, opacity: 0.5 }}>🇦🇪</span>
                     </a>
 
@@ -81,7 +83,7 @@ export default function Navbar() {
                         {/* Services Dropdown */}
                         <div className="nav-item" style={{ position: "relative" }}>
                             <span className="nav-link" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--text-muted)", cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
-                                Services <ChevronDown size={12} />
+                                Services <ChevronDown size={12} className="dropdown-chevron" />
                             </span>
                             <div className="nav-dropdown">
                                 {servicesDropdown.map(item => (
@@ -105,7 +107,7 @@ export default function Navbar() {
                         {/* Resources Dropdown */}
                         <div className="nav-item" style={{ position: "relative" }}>
                             <span className="nav-link" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--text-muted)", cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
-                                Resources <ChevronDown size={12} />
+                                Resources <ChevronDown size={12} className="dropdown-chevron" />
                             </span>
                             <div className="nav-dropdown">
                                 {resourcesDropdown.map(item => (
@@ -115,19 +117,12 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    {/* Right Side Buttons — desktop */}
-                    <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden-mobile">
-                        <a href="/resources" className="btn-outline" style={{ fontSize: "0.82rem", padding: "0.5rem 1rem" }}>
+                    {/* Right Side Buttons */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                        <a href="/resources" className="btn-outline hidden-mobile" style={{ fontSize: "0.82rem", padding: "0.5rem 1rem" }}>
                             Free Playbook
                         </a>
                         <a href="/contact" className="btn-primary" style={{ fontSize: "0.82rem", padding: "0.5rem 1.25rem" }}>
-                            Book Audit
-                        </a>
-                    </div>
-
-                    {/* Mobile: just Book Audit button, no hamburger */}
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }} className="show-mobile">
-                        <a href="/contact" className="btn-primary" style={{ fontSize: "0.82rem", padding: "0.5rem 1rem" }}>
                             Book Audit
                         </a>
                     </div>
