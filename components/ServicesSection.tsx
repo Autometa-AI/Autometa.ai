@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
     ArrowRight,
     Users,
@@ -120,6 +121,9 @@ const categories: Category[] = [
     },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const vp = { once: true, amount: 0.15 as const };
+
 export default function ServicesSection() {
     const isMobile = useIsMobile();
 
@@ -128,8 +132,17 @@ export default function ServicesSection() {
             <div className="container-wide">
                 {/* Header */}
                 <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 4rem" }}>
-                    <span className="section-eyebrow" style={{ justifyContent: "center" }}>Services & Solutions</span>
-                    <h2
+                    <motion.span
+                        className="section-eyebrow"
+                        style={{ justifyContent: "center" }}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, ease }}
+                    >
+                        Services & Solutions
+                    </motion.span>
+                    <motion.h2
                         className="font-display"
                         style={{
                             fontSize: "clamp(2.2rem, 4.2vw, 3.25rem)",
@@ -139,12 +152,22 @@ export default function ServicesSection() {
                             lineHeight: 1.08,
                             marginBottom: 16,
                         }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.7, delay: 0.1, ease }}
                     >
                         Everything You Need to <span className="gradient-text">Scale Your Agency</span>
-                    </h2>
-                    <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
+                    </motion.h2>
+                    <motion.p
+                        style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, delay: 0.2, ease }}
+                    >
                         Three categories of services — built together or independently — that turn your agency into a high-performance machine.
-                    </p>
+                    </motion.p>
                 </div>
 
                 {/* Categories */}
@@ -152,7 +175,7 @@ export default function ServicesSection() {
                     {categories.map((cat) => (
                         <div key={cat.id}>
                             {/* Category header */}
-                            <div
+                            <motion.div
                                 style={{
                                     display: "grid",
                                     gridTemplateColumns: isMobile ? "1fr" : "0.9fr 1.1fr",
@@ -162,6 +185,10 @@ export default function ServicesSection() {
                                     paddingBottom: 20,
                                     borderBottom: "1px solid var(--border)",
                                 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={vp}
+                                transition={{ duration: 0.6, ease }}
                             >
                                 <div>
                                     <div style={{
@@ -185,12 +212,12 @@ export default function ServicesSection() {
                                 <p style={{ fontSize: "1.1rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
                                     {cat.tagline}
                                 </p>
-                            </div>
+                            </motion.div>
 
-                            {/* Individual service cards — full-width stacked */}
+                            {/* Individual service cards */}
                             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                                {cat.items.map((item) => (
-                                    <a
+                                {cat.items.map((item, i) => (
+                                    <motion.a
                                         key={item.title}
                                         href="/services"
                                         className="glass-card"
@@ -204,6 +231,10 @@ export default function ServicesSection() {
                                             color: "inherit",
                                             cursor: "pointer",
                                         }}
+                                        initial={{ opacity: 0, y: 24 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, amount: 0.1 }}
+                                        transition={{ duration: 0.6, delay: i * 0.1, ease }}
                                     >
                                         {/* Icon */}
                                         <div
@@ -246,7 +277,7 @@ export default function ServicesSection() {
                                                 <ArrowRight size={20} />
                                             </div>
                                         )}
-                                    </a>
+                                    </motion.a>
                                 ))}
                             </div>
                         </div>
@@ -254,11 +285,17 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Footer CTA */}
-                <div style={{ textAlign: "center", marginTop: "4rem" }}>
+                <motion.div
+                    style={{ textAlign: "center", marginTop: "4rem" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={vp}
+                    transition={{ duration: 0.6, ease }}
+                >
                     <a href="/services" className="btn-primary">
                         Explore All Services <ArrowRight size={15} />
                     </a>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

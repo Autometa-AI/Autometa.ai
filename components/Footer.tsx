@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Mail, Linkedin, Twitter, Home } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -25,6 +26,9 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     ],
 };
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const vp = { once: true, amount: 0.1 as const };
+
 export default function Footer() {
     const isMobile = useIsMobile();
 
@@ -37,7 +41,12 @@ export default function Footer() {
                     gap: isMobile ? "2rem" : "3rem",
                     marginBottom: "3rem",
                 }}>
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, ease }}
+                    >
                         <div style={{ display: "flex", alignItems: "center", gap: 9, marginBottom: "1rem" }}>
                             <div style={{
                                 width: 28, height: 28, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
@@ -56,23 +65,34 @@ export default function Footer() {
                         </a>
                         <div style={{ display: "flex", gap: 6 }}>
                             {[{ Icon: Linkedin, label: "LinkedIn" }, { Icon: Twitter, label: "Twitter" }].map(({ Icon, label }) => (
-                                <a key={label} href="#" title={label}
+                                <motion.a
+                                    key={label}
+                                    href="#"
+                                    title={label}
                                     style={{
                                         width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center",
                                         border: "1px solid var(--border)", borderRadius: 8, color: "var(--text-faint)", textDecoration: "none",
                                         transition: "all 0.2s",
-                                    }}>
+                                    }}
+                                    whileHover={{ scale: 1.1 }}
+                                >
                                     <Icon size={13} />
-                                </a>
+                                </motion.a>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {Object.entries(footerLinks).map(([cat, links]) => (
-                        <div key={cat}>
+                    {Object.entries(footerLinks).map(([cat, links], catIdx) => (
+                        <motion.div
+                            key={cat}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={vp}
+                            transition={{ duration: 0.6, delay: 0.1 + catIdx * 0.1, ease }}
+                        >
                             <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: "1rem", fontFamily: "'JetBrains Mono', monospace" }}>{cat}</h4>
                             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
-                                {links.map(link => (
+                                {links.map((link) => (
                                     <li key={link.label}>
                                         <a href={link.href} className="footer-link"
                                             style={{ fontSize: "0.9rem", color: "var(--text-faint)", textDecoration: "none" }}>
@@ -81,17 +101,23 @@ export default function Footer() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
-                <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                <motion.div
+                    style={{ borderTop: "1px solid var(--border)", paddingTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={vp}
+                    transition={{ duration: 0.6, delay: 0.4, ease }}
+                >
                     <span style={{ fontSize: "0.75rem", color: "var(--text-faint)" }}>&copy; {new Date().getFullYear()} Autometa Inc.</span>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                         <div className="pulse-dot" style={{ width: 5, height: 5, borderRadius: "50%", background: "#00CFFF" }} />
                         <span style={{ fontSize: "0.75rem", color: "var(--text-faint)", fontWeight: 500 }}>All systems operational</span>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </footer>
     );

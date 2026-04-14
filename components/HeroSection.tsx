@@ -176,6 +176,8 @@ const clientLogos = [
     "Emaar", "Damac", "Nakheel", "Aldar", "Sobha", "Binghatti", "Dubai Holding", "Meraas", "Azizi", "Ellington",
 ];
 
+const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 export default function HeroSection() {
     const isMobile = useIsMobile();
     const [index, setIndex] = useState(0);
@@ -199,20 +201,23 @@ export default function HeroSection() {
                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 0.95fr", gap: isMobile ? "2.5rem" : "3rem", alignItems: "center" }}>
                     {/* LEFT */}
                     <div>
-                        <div
+                        <motion.div
                             style={{
                                 display: "inline-flex", alignItems: "center", gap: 8,
                                 marginBottom: 22, borderRadius: 999, padding: "6px 14px",
                                 background: "var(--tag-bg)", border: "1px solid var(--tag-border)",
                             }}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.1, ease }}
                         >
                             <Building2 size={13} style={{ color: "var(--accent)" }} />
                             <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--tag-text)", fontFamily: "'JetBrains Mono', monospace" }}>
                                 Built for UAE real estate teams
                             </span>
-                        </div>
+                        </motion.div>
 
-                        <h1
+                        <motion.h1
                             className="font-display"
                             style={{
                                 fontSize: "clamp(2.6rem, 5.5vw, 4.2rem)",
@@ -220,35 +225,65 @@ export default function HeroSection() {
                                 letterSpacing: "-0.035em", color: "var(--text)",
                                 marginBottom: 22,
                             }}
+                            initial={{ opacity: 0, y: 28 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2, ease }}
                         >
                             We Build <span className="gradient-text">AI Systems</span><br />
                             for Real Estate Agencies
-                        </h1>
+                        </motion.h1>
 
-                        <p
+                        <motion.p
                             style={{
                                 fontSize: "1.2rem", color: "var(--text-secondary)", lineHeight: 1.65,
                                 maxWidth: 540, marginBottom: 24,
                             }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.35, ease }}
                         >
                             A strategic technological partner for real estate companies — from lead capture to closing.
-                        </p>
+                        </motion.p>
 
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
-                            {["Agencies", "Brokers", "Agents", "Developers"].map((kw) => (
-                                <span key={kw} className="tag" style={{ fontSize: "0.78rem" }}>{kw}</span>
+                        <motion.div
+                            style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.45, ease }}
+                        >
+                            {["Agencies", "Brokers", "Agents", "Developers"].map((kw, i) => (
+                                <motion.span
+                                    key={kw}
+                                    className="tag"
+                                    style={{ fontSize: "0.78rem" }}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.4, delay: 0.5 + i * 0.07, ease }}
+                                >
+                                    {kw}
+                                </motion.span>
                             ))}
-                        </div>
+                        </motion.div>
 
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                        <motion.div
+                            style={{ display: "flex", flexWrap: "wrap", gap: 12 }}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.55, ease }}
+                        >
                             <a href="/contact" className="btn-primary">Book System Audit <ArrowRight size={15} /></a>
                             <a href="/services" className="btn-secondary">View Our Services <ChevronRight size={15} /></a>
-                        </div>
+                        </motion.div>
                     </div>
 
                     {/* RIGHT — Image Carousel */}
                     {!isMobile && (
-                        <div style={{ position: "relative" }}>
+                        <motion.div
+                            style={{ position: "relative" }}
+                            initial={{ opacity: 0, x: 40, scale: 0.96 }}
+                            animate={{ opacity: 1, x: 0, scale: 1 }}
+                            transition={{ duration: 0.9, delay: 0.3, ease }}
+                        >
                             {/* Frame */}
                             <div style={{ position: "relative" }}>
                                 <div className="dashboard-mockup" style={{ minHeight: 340 }}>
@@ -276,7 +311,7 @@ export default function HeroSection() {
                                 </div>
 
                                 {/* Arrows */}
-                                <button
+                                <motion.button
                                     onClick={prev}
                                     aria-label="Previous"
                                     style={{
@@ -287,10 +322,12 @@ export default function HeroSection() {
                                         color: "var(--text)", cursor: "pointer", zIndex: 3,
                                         boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
                                     }}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
                                     <ArrowLeft size={16} />
-                                </button>
-                                <button
+                                </motion.button>
+                                <motion.button
                                     onClick={next}
                                     aria-label="Next"
                                     style={{
@@ -301,9 +338,11 @@ export default function HeroSection() {
                                         color: "var(--text)", cursor: "pointer", zIndex: 3,
                                         boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
                                     }}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
                                     <ArrowRight size={16} />
-                                </button>
+                                </motion.button>
                             </div>
 
                             {/* Caption */}
@@ -337,12 +376,17 @@ export default function HeroSection() {
                                     />
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     )}
                 </div>
 
                 {/* Clients Marquee */}
-                <div style={{ marginTop: isMobile ? 44 : 54 }}>
+                <motion.div
+                    style={{ marginTop: isMobile ? 44 : 54 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.7, ease }}
+                >
                     <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "var(--text-faint)", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'JetBrains Mono', monospace", textAlign: "center", marginBottom: 16 }}>
                         Trusted by teams across the UAE
                     </div>
@@ -371,7 +415,7 @@ export default function HeroSection() {
                             ))}
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

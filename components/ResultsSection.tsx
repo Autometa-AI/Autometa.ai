@@ -58,6 +58,9 @@ const testimonials: Testimonial[] = [
     },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const vp = { once: true, amount: 0.15 as const };
+
 export default function ResultsSection() {
     const isMobile = useIsMobile();
     const [tIndex, setTIndex] = useState(0);
@@ -78,8 +81,17 @@ export default function ResultsSection() {
             <section id="results" style={{ padding: "6rem 0 5rem", position: "relative" }}>
                 <div className="container-wide">
                     <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 3.5rem" }}>
-                        <span className="section-eyebrow" style={{ justifyContent: "center" }}>The Numbers</span>
-                        <h2
+                        <motion.span
+                            className="section-eyebrow"
+                            style={{ justifyContent: "center" }}
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={vp}
+                            transition={{ duration: 0.6, ease }}
+                        >
+                            The Numbers
+                        </motion.span>
+                        <motion.h2
                             className="font-display"
                             style={{
                                 fontSize: "clamp(2.4rem, 4.6vw, 3.5rem)",
@@ -88,9 +100,13 @@ export default function ResultsSection() {
                                 color: "var(--text)",
                                 lineHeight: 1.08,
                             }}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={vp}
+                            transition={{ duration: 0.7, delay: 0.1, ease }}
                         >
                             Results That <span className="gradient-text">Speak</span>
-                        </h2>
+                        </motion.h2>
                     </div>
 
                     {/* Bento Grid */}
@@ -104,13 +120,17 @@ export default function ResultsSection() {
                             margin: "0 auto",
                         }}
                     >
-                        {stats.map((s) => (
-                            <div
+                        {stats.map((s, i) => (
+                            <motion.div
                                 key={s.label}
                                 className="glass-card"
                                 style={{
                                     padding: isMobile ? "1.75rem" : "2rem 2.25rem",
                                 }}
+                                initial={{ opacity: 0, y: 24 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: i * 0.1, ease }}
                             >
                                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
                                     <div style={{ width: 8, height: 8, borderRadius: "50%", background: s.accent }} />
@@ -136,11 +156,11 @@ export default function ResultsSection() {
                                     {s.value}
                                 </div>
                                 <div style={{ fontSize: "0.95rem", color: "var(--text-muted)" }}>{s.sub}</div>
-                            </div>
+                            </motion.div>
                         ))}
 
                         {/* Video / Case Study tile */}
-                        <div
+                        <motion.div
                             className="glass-card"
                             style={{
                                 padding: 0,
@@ -150,6 +170,10 @@ export default function ResultsSection() {
                                 minHeight: isMobile ? 200 : "auto",
                                 background: "linear-gradient(135deg, rgba(0,207,255,0.12) 0%, rgba(0,0,0,0.5) 100%)",
                             }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.1 }}
+                            transition={{ duration: 0.7, delay: 0.3, ease }}
                         >
                             <div
                                 style={{
@@ -168,7 +192,7 @@ export default function ResultsSection() {
                                 }}
                             >
                                 <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                                    <button
+                                    <motion.button
                                         aria-label="Play case study"
                                         style={{
                                             width: 52, height: 52, borderRadius: "50%",
@@ -176,9 +200,11 @@ export default function ResultsSection() {
                                             display: "flex", alignItems: "center", justifyContent: "center",
                                             cursor: "pointer", boxShadow: "0 8px 32px rgba(0,207,255,0.4)",
                                         }}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         <Play size={20} fill="#fff" />
-                                    </button>
+                                    </motion.button>
                                     <div>
                                         <div style={{
                                             fontSize: "0.75rem", fontWeight: 700, color: "var(--accent)",
@@ -203,14 +229,20 @@ export default function ResultsSection() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
 
-                    <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                    <motion.div
+                        style={{ textAlign: "center", marginTop: "3rem" }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, ease }}
+                    >
                         <a href="/contact" className="btn-primary">
                             Book Strategy Call <ArrowRight size={15} />
                         </a>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -218,8 +250,17 @@ export default function ResultsSection() {
             <section id="testimonials" style={{ padding: "4rem 0 6rem", position: "relative" }}>
                 <div className="container-wide">
                     <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 3rem" }}>
-                        <span className="section-eyebrow" style={{ justifyContent: "center" }}>Proven Results</span>
-                        <h2
+                        <motion.span
+                            className="section-eyebrow"
+                            style={{ justifyContent: "center" }}
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={vp}
+                            transition={{ duration: 0.6, ease }}
+                        >
+                            Proven Results
+                        </motion.span>
+                        <motion.h2
                             className="font-display"
                             style={{
                                 fontSize: "clamp(2.4rem, 4.6vw, 3.5rem)",
@@ -228,14 +269,22 @@ export default function ResultsSection() {
                                 color: "var(--text)",
                                 lineHeight: 1.08,
                             }}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={vp}
+                            transition={{ duration: 0.7, delay: 0.1, ease }}
                         >
                             What Our <span className="gradient-text">Clients Say</span>
-                        </h2>
+                        </motion.h2>
                     </div>
 
-                    <div
+                    <motion.div
                         className="glass-card"
                         style={{ maxWidth: 980, margin: "0 auto", padding: 0, overflow: "hidden" }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 0.7, ease }}
                     >
                         <div
                             style={{
@@ -330,7 +379,7 @@ export default function ResultsSection() {
                                 {/* Controls */}
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                                     <div style={{ display: "flex", gap: 10 }}>
-                                        <button
+                                        <motion.button
                                             onClick={prevT}
                                             aria-label="Previous"
                                             style={{
@@ -339,10 +388,12 @@ export default function ResultsSection() {
                                                 color: "var(--text)", cursor: "pointer",
                                                 display: "flex", alignItems: "center", justifyContent: "center",
                                             }}
+                                            whileHover={{ scale: 1.08 }}
+                                            whileTap={{ scale: 0.95 }}
                                         >
                                             <ArrowLeft size={16} />
-                                        </button>
-                                        <button
+                                        </motion.button>
+                                        <motion.button
                                             onClick={nextT}
                                             aria-label="Next"
                                             style={{
@@ -351,9 +402,11 @@ export default function ResultsSection() {
                                                 color: "var(--text)", cursor: "pointer",
                                                 display: "flex", alignItems: "center", justifyContent: "center",
                                             }}
+                                            whileHover={{ scale: 1.08 }}
+                                            whileTap={{ scale: 0.95 }}
                                         >
                                             <ArrowRight size={16} />
-                                        </button>
+                                        </motion.button>
                                     </div>
                                     <div style={{
                                         fontSize: "0.78rem", color: "var(--text-faint)",
@@ -364,7 +417,7 @@ export default function ResultsSection() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
         </>

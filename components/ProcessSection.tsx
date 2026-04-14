@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
     PhoneCall,
     Search,
@@ -56,6 +57,9 @@ const steps: Step[] = [
     },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const vp = { once: true, amount: 0.15 as const };
+
 export default function ProcessSection() {
     const isMobile = useIsMobile();
 
@@ -64,8 +68,17 @@ export default function ProcessSection() {
             <div className="container-wide">
                 {/* Header */}
                 <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 4rem" }}>
-                    <span className="section-eyebrow" style={{ justifyContent: "center" }}>How We Work</span>
-                    <h2
+                    <motion.span
+                        className="section-eyebrow"
+                        style={{ justifyContent: "center" }}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, ease }}
+                    >
+                        How We Work
+                    </motion.span>
+                    <motion.h2
                         className="font-display"
                         style={{
                             fontSize: "clamp(2.2rem, 4.2vw, 3.25rem)",
@@ -75,12 +88,22 @@ export default function ProcessSection() {
                             lineHeight: 1.08,
                             marginBottom: 16,
                         }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.7, delay: 0.1, ease }}
                     >
                         From the <span className="gradient-text">First Call</span> to Project Delivery
-                    </h2>
-                    <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
+                    </motion.h2>
+                    <motion.p
+                        style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, delay: 0.2, ease }}
+                    >
                         A proven 5-step process that turns fragmented operations into a scalable, AI-powered system — with zero guesswork.
-                    </p>
+                    </motion.p>
                 </div>
 
                 {/* Vertical Steps */}
@@ -98,7 +121,7 @@ export default function ProcessSection() {
                     )}
 
                     {steps.map((step, i) => (
-                        <div
+                        <motion.div
                             key={step.num}
                             style={{
                                 display: "flex",
@@ -107,15 +130,23 @@ export default function ProcessSection() {
                                 zIndex: 1,
                                 marginBottom: i === steps.length - 1 ? 0 : 28,
                             }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.7, ease }}
                         >
                             {/* Number bubble */}
-                            <div
+                            <motion.div
                                 style={{
                                     flexShrink: 0, width: 80, height: 80, borderRadius: 20,
                                     background: "var(--surface-solid)", border: "1px solid var(--border)",
                                     display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                                     gap: 4, boxShadow: "0 6px 24px rgba(0,0,0,0.3)",
                                 }}
+                                initial={{ opacity: 0, scale: 0.85 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.1, ease }}
                             >
                                 <div style={{ color: "var(--accent)" }}>{step.icon}</div>
                                 <div style={{
@@ -124,10 +155,17 @@ export default function ProcessSection() {
                                 }}>
                                     STEP {step.num}
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Content card */}
-                            <div className="glass-card" style={{ flex: 1, padding: isMobile ? "1.5rem 1.25rem" : "1.85rem 2rem", minWidth: 0 }}>
+                            <motion.div
+                                className="glass-card"
+                                style={{ flex: 1, padding: isMobile ? "1.5rem 1.25rem" : "1.85rem 2rem", minWidth: 0 }}
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.15, ease }}
+                            >
                                 <h3
                                     className="font-display"
                                     style={{
@@ -146,17 +184,23 @@ export default function ProcessSection() {
                                         <span key={d} className="tag" style={{ fontSize: "0.78rem" }}>{d}</span>
                                     ))}
                                 </div>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     ))}
                 </div>
 
                 {/* CTA */}
-                <div style={{ textAlign: "center", marginTop: "3.5rem" }}>
+                <motion.div
+                    style={{ textAlign: "center", marginTop: "3.5rem" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={vp}
+                    transition={{ duration: 0.6, ease }}
+                >
                     <a href="/contact" className="btn-primary">
                         Start with a Discovery Call <ArrowRight size={15} />
                     </a>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

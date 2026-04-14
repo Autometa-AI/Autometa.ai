@@ -78,6 +78,9 @@ const resources: Card[] = [
     },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const vp = { once: true, amount: 0.15 as const };
+
 export default function ResourceHubTeaser() {
     const isMobile = useIsMobile();
     const [tab, setTab] = useState<Tab>("blogs");
@@ -88,8 +91,17 @@ export default function ResourceHubTeaser() {
             <div className="container-wide">
                 {/* Header */}
                 <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 2.5rem" }}>
-                    <span className="section-eyebrow" style={{ justifyContent: "center" }}>From Our Hub</span>
-                    <h2
+                    <motion.span
+                        className="section-eyebrow"
+                        style={{ justifyContent: "center" }}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, ease }}
+                    >
+                        From Our Hub
+                    </motion.span>
+                    <motion.h2
                         className="font-display"
                         style={{
                             fontSize: "clamp(2.4rem, 4.6vw, 3.5rem)",
@@ -99,16 +111,32 @@ export default function ResourceHubTeaser() {
                             lineHeight: 1.08,
                             marginBottom: 14,
                         }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.7, delay: 0.1, ease }}
                     >
                         Insights & <span className="gradient-text">Strategies</span>
-                    </h2>
-                    <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}>
+                    </motion.h2>
+                    <motion.p
+                        style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={vp}
+                        transition={{ duration: 0.6, delay: 0.2, ease }}
+                    >
                         Actionable guides, playbooks, and templates on AI, automation, and real estate growth.
-                    </p>
+                    </motion.p>
                 </div>
 
                 {/* Tab Switcher */}
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem" }}>
+                <motion.div
+                    style={{ display: "flex", justifyContent: "center", marginBottom: "2.5rem" }}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={vp}
+                    transition={{ duration: 0.5, delay: 0.1, ease }}
+                >
                     <div
                         style={{
                             display: "inline-flex", gap: 4, padding: 5,
@@ -133,7 +161,7 @@ export default function ResourceHubTeaser() {
                             </button>
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Cards Grid */}
                 <AnimatePresence mode="wait">
@@ -153,8 +181,8 @@ export default function ResourceHubTeaser() {
                             gap: 16,
                         }}
                     >
-                        {activeCards.map((card) => (
-                            <a
+                        {activeCards.map((card, i) => (
+                            <motion.a
                                 key={card.title}
                                 href={tab === "blogs" ? "/blog" : "/resources"}
                                 className="glass-card"
@@ -166,10 +194,11 @@ export default function ResourceHubTeaser() {
                                     flexDirection: "column",
                                     overflow: "hidden",
                                     cursor: "pointer",
-                                    transition: "transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
                                 }}
-                                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)"; }}
-                                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+                                initial={{ opacity: 0, y: 24 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: i * 0.1, ease }}
+                                whileHover={{ y: -6, transition: { duration: 0.3, ease: "easeOut" } }}
                             >
                                 {/* Gradient cover */}
                                 <div
@@ -240,13 +269,19 @@ export default function ResourceHubTeaser() {
                                         </span>
                                     </div>
                                 </div>
-                            </a>
+                            </motion.a>
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
                 {/* CTA */}
-                <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                <motion.div
+                    style={{ textAlign: "center", marginTop: "3rem" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={vp}
+                    transition={{ duration: 0.6, ease }}
+                >
                     <a
                         href={tab === "blogs" ? "/blog" : "/resources"}
                         className="btn-secondary"
@@ -254,7 +289,7 @@ export default function ResourceHubTeaser() {
                     >
                         View all {tab === "blogs" ? "articles" : "resources"} <ArrowRight size={14} />
                     </a>
-                </div>
+                </motion.div>
             </div>
         </section>
     );
