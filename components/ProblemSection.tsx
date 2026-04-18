@@ -107,41 +107,43 @@ export default function ProblemSection() {
                     trigger: sectionRef.current,
                     pin: pinnedRef.current,
                     start: "top top",
-                    end: `+=${numCards * 100}vh`,
-                    scrub: 0.6,
+                    end: `+=${numCards * 280}vh`,
+                    scrub: 1.5,
                     anticipatePin: 1,
                 },
             });
 
+            const CARD_SLOT = 2.0;
+
             cards.forEach((card, i) => {
                 const counterEl = counterRef.current;
+                const slotStart = i * CARD_SLOT;
 
-                // Enter: page flips in (rotateY 90 → 0, like opening a book page)
+                // Enter: soft page-flip (rotateY 70 → 0)
                 tl.fromTo(
                     card,
-                    { opacity: 0, rotateY: 90 },
-                    { opacity: 1, rotateY: 0, duration: 0.3, ease: "power2.out" },
-                    i * 1
+                    { opacity: 0, rotateY: 70 },
+                    { opacity: 1, rotateY: 0, duration: 0.45, ease: "power2.out" },
+                    slotStart
                 );
 
-                // Update counter
                 if (counterEl) {
                     tl.to(counterEl, {
                         textContent: String(i + 1).padStart(2, "0"),
                         duration: 0.01,
                         snap: { textContent: 1 },
-                    }, i * 1 + 0.01);
+                    }, slotStart + 0.02);
                 }
 
-                // Hold: stay visible for reading
-                tl.to(card, { duration: 0.45 }, i * 1 + 0.3);
+                // Hold: long, comfortable read-time on each pain point
+                tl.to(card, { duration: 1.25 }, slotStart + 0.45);
 
-                // Exit: page flips out (rotateY 0 → -90, like turning the page)
+                // Exit: page flips out (last card lingers)
                 if (i < numCards - 1) {
                     tl.to(
                         card,
-                        { opacity: 0, rotateY: -90, duration: 0.25, ease: "power2.in" },
-                        i * 1 + 0.75
+                        { opacity: 0, rotateY: -70, duration: 0.3, ease: "power2.in" },
+                        slotStart + 1.7
                     );
                 }
             });
@@ -189,7 +191,7 @@ export default function ProblemSection() {
                                 </h3>
                                 <p style={{ fontSize: "0.95rem", color: p.accent, fontWeight: 600, marginBottom: 12 }}>{p.subtitle}</p>
                                 <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 18 }}>{p.desc}</p>
-                                <div style={{ padding: "0.85rem 1rem", background: "rgba(0,0,0,0.35)", borderRadius: 12, border: `1px solid ${p.accent}33`, display: "flex", alignItems: "center", gap: 12 }}>
+                                <div style={{ padding: "0.85rem 1rem", background: "var(--surface-muted)", borderRadius: 12, border: `1px solid ${p.accent}33`, display: "flex", alignItems: "center", gap: 12 }}>
                                     <TrendingDown size={18} style={{ color: p.accent, flexShrink: 0 }} />
                                     <div>
                                         <div className="font-display" style={{ fontSize: "1.6rem", fontWeight: 800, color: p.accent, lineHeight: 1 }}>{p.stat}</div>
@@ -336,7 +338,7 @@ export default function ProblemSection() {
 
                                             {/* Stat */}
                                             <div style={{
-                                                padding: "1rem 1.2rem", background: "rgba(0,0,0,0.35)",
+                                                padding: "1rem 1.2rem", background: "var(--surface-muted)",
                                                 borderRadius: 14, border: `1px solid ${p.accent}33`,
                                                 display: "flex", alignItems: "center", gap: 16,
                                             }}>

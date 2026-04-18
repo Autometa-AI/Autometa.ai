@@ -131,7 +131,7 @@ export default function AboutSection() {
                                         {/* Progress bar */}
                                         <div className="flex-1">
                                             <div className="text-sm font-semibold mb-1.5">{step.label}</div>
-                                            <div className="h-1.5 bg-[rgba(255,255,255,0.06)] rounded-full overflow-hidden">
+                                            <div className="h-1.5 bg-[rgba(10,14,24,0.06)] rounded-full overflow-hidden">
                                                 <motion.div
                                                     className="h-full rounded-full"
                                                     style={{ background: `linear-gradient(90deg, ${step.color}, ${step.color}88)` }}

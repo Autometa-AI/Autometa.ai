@@ -141,7 +141,7 @@ export default function ProcessSection() {
                                     flexShrink: 0, width: 80, height: 80, borderRadius: 20,
                                     background: "var(--surface-solid)", border: "1px solid var(--border)",
                                     display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                                    gap: 4, boxShadow: "0 6px 24px rgba(0,0,0,0.3)",
+                                    gap: 4, boxShadow: "0 6px 24px rgba(10,14,24,0.08)",
                                 }}
                                 initial={{ opacity: 0, scale: 0.85 }}
                                 whileInView={{ opacity: 1, scale: 1 }}

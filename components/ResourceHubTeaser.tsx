@@ -99,7 +99,7 @@ export default function ResourceHubTeaser() {
                         viewport={vp}
                         transition={{ duration: 0.6, ease }}
                     >
-                        From Our Hub
+                        Blogs & Resources
                     </motion.span>
                     <motion.h2
                         className="font-display"
@@ -125,7 +125,7 @@ export default function ResourceHubTeaser() {
                         viewport={vp}
                         transition={{ duration: 0.6, delay: 0.2, ease }}
                     >
-                        Actionable guides, playbooks, and templates on AI, automation, and real estate growth.
+                        Actionable guides, playbooks, and templates on AI, automation, and real estate agency growth.
                     </motion.p>
                 </div>
 
@@ -157,7 +157,7 @@ export default function ResourceHubTeaser() {
                                     transition: "all 0.25s",
                                 }}
                             >
-                                {t === "blogs" ? "Blog Posts" : "Free Resources"}
+                                {t === "blogs" ? "Blog Posts" : "Playbooks"}
                             </button>
                         ))}
                     </div>
@@ -287,7 +287,7 @@ export default function ResourceHubTeaser() {
                         className="btn-secondary"
                         style={{ fontSize: "0.9rem" }}
                     >
-                        View all {tab === "blogs" ? "articles" : "resources"} <ArrowRight size={14} />
+                        View all {tab === "blogs" ? "articles" : "playbooks"} <ArrowRight size={14} />
                     </a>
                 </motion.div>
             </div>

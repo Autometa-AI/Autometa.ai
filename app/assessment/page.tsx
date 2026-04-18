@@ -189,7 +189,7 @@ export default function AssessmentPage() {
         padding: "0.85rem 1.1rem",
         fontSize: "0.95rem",
         fontFamily: "'Inter', sans-serif",
-        background: "rgba(255,255,255,0.03)",
+        background: "var(--surface-muted)",
         border: "1px solid var(--border)",
         borderRadius: 12,
         color: "var(--text)",
@@ -372,7 +372,7 @@ export default function AssessmentPage() {
                                                                                 : "1px solid var(--border)",
                                                                             background: selected
                                                                                 ? "var(--tag-bg)"
-                                                                                : "rgba(255,255,255,0.02)",
+                                                                                : "var(--surface-muted)",
                                                                             color: selected
                                                                                 ? "var(--accent)"
                                                                                 : "var(--text-muted)",

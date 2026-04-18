@@ -125,9 +125,9 @@ const slides: Slide[] = [
                         <span style={{ marginLeft: "auto", fontSize: "0.58rem", color: "#66F2FF", fontWeight: 700 }}>● LIVE</span>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                        <div style={{ alignSelf: "flex-start", maxWidth: "82%", background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "7px 11px", fontSize: "0.67rem", color: "var(--text-secondary)" }}>Hi, interested in Unit 7A. Is it available?</div>
+                        <div style={{ alignSelf: "flex-start", maxWidth: "82%", background: "var(--surface-muted)", borderRadius: 10, padding: "7px 11px", fontSize: "0.67rem", color: "var(--text-secondary)" }}>Hi, interested in Unit 7A. Is it available?</div>
                         <div style={{ alignSelf: "flex-end", maxWidth: "82%", background: "var(--accent)", borderRadius: 10, padding: "7px 11px", fontSize: "0.67rem", color: "#fff" }}>Yes! Unit 7A is available. Would you like a viewing tomorrow 2pm?</div>
-                        <div style={{ alignSelf: "flex-start", maxWidth: "60%", background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "7px 11px", fontSize: "0.67rem", color: "var(--text-secondary)" }}>Yes please</div>
+                        <div style={{ alignSelf: "flex-start", maxWidth: "60%", background: "var(--surface-muted)", borderRadius: 10, padding: "7px 11px", fontSize: "0.67rem", color: "var(--text-secondary)" }}>Yes please</div>
                     </div>
                 </div>
                 <div style={{ background: "var(--surface-solid)", borderRadius: 10, padding: "0.75rem 0.9rem", border: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
@@ -271,7 +271,7 @@ export default function HeroSection() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.55, ease }}
                         >
-                            <a href="/contact" className="btn-primary">Book System Audit <ArrowRight size={15} /></a>
+                            <a href="/contact" className="btn-primary">Book Audit <ArrowRight size={15} /></a>
                             <a href="/services" className="btn-secondary">View Our Services <ChevronRight size={15} /></a>
                         </motion.div>
                     </div>
@@ -288,9 +288,9 @@ export default function HeroSection() {
                             <div style={{ position: "relative" }}>
                                 <div className="dashboard-mockup" style={{ minHeight: 340 }}>
                                     <div className="dashboard-bar">
-                                        <div className="dashboard-dot" style={{ background: "#6E6E6E" }} />
-                                        <div className="dashboard-dot" style={{ background: "#9A9A9A" }} />
-                                        <div className="dashboard-dot" style={{ background: "#C0C0C0" }} />
+                                        <div className="dashboard-dot" style={{ background: "#FF5F57" }} />
+                                        <div className="dashboard-dot" style={{ background: "#FEBC2E" }} />
+                                        <div className="dashboard-dot" style={{ background: "#28C840" }} />
                                         <span style={{ marginLeft: 12, fontSize: "0.7rem", color: "var(--text-faint)", fontWeight: 500, fontFamily: "'JetBrains Mono', monospace" }}>
                                             autometa.app/{slide.id}
                                         </span>
@@ -320,7 +320,7 @@ export default function HeroSection() {
                                         background: "var(--surface-solid)", border: "1px solid var(--border)",
                                         display: "flex", alignItems: "center", justifyContent: "center",
                                         color: "var(--text)", cursor: "pointer", zIndex: 3,
-                                        boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+                                        boxShadow: "0 4px 16px rgba(10,14,24,0.08)",
                                     }}
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}
@@ -336,7 +336,7 @@ export default function HeroSection() {
                                         background: "var(--surface-solid)", border: "1px solid var(--border)",
                                         display: "flex", alignItems: "center", justifyContent: "center",
                                         color: "var(--text)", cursor: "pointer", zIndex: 3,
-                                        boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+                                        boxShadow: "0 4px 16px rgba(10,14,24,0.08)",
                                     }}
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}

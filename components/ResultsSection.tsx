@@ -168,7 +168,7 @@ export default function ResultsSection() {
                                 position: "relative",
                                 overflow: "hidden",
                                 minHeight: isMobile ? 200 : "auto",
-                                background: "linear-gradient(135deg, rgba(0,207,255,0.12) 0%, rgba(0,0,0,0.5) 100%)",
+                                background: "linear-gradient(135deg, rgba(0,102,255,0.10) 0%, rgba(10,14,24,0.92) 100%)",
                             }}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}

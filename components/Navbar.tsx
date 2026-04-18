@@ -35,15 +35,10 @@ export default function Navbar() {
     }, []);
 
     return (
-        <>
-            {/* Announcement Bar */}
+        <div className="sticky-top-group">
+            {/* Announcement Bar — stacked with header inside the sticky group so both pin together */}
             {showBanner && (
-                <motion.div
-                    className="announcement-bar"
-                    initial={{ opacity: 0, y: -32 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease }}
-                >
+                <div className="announcement-bar">
                     <span className="announcement-badge">NEW</span>
                     <span>The 2026 AI for Real Estate Agencies Playbook — Free Download</span>
                     <a href="/resources" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
@@ -55,22 +50,22 @@ export default function Navbar() {
                     >
                         <X size={14} />
                     </button>
-                </motion.div>
+                </div>
             )}
 
             {/* Main Header */}
             <motion.header
                 style={{
-                    position: "sticky", top: 0, left: 0, right: 0, zIndex: 50,
-                    background: scrolled ? "var(--surface)" : "rgba(5,5,5,0.85)",
-                    borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-                    backdropFilter: "blur(24px) saturate(1.6)",
-                    WebkitBackdropFilter: "blur(24px) saturate(1.6)",
+                    position: "relative", zIndex: 50,
+                    background: scrolled ? "rgba(255,255,255,0.85)" : "#FFFFFF",
+                    borderBottom: scrolled ? "1px solid var(--border)" : "1px solid var(--border-subtle)",
+                    backdropFilter: "blur(24px) saturate(1.4)",
+                    WebkitBackdropFilter: "blur(24px) saturate(1.4)",
                     transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
-                initial={{ opacity: 0, y: -16 }}
+                initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.05, ease }}
+                transition={{ duration: 0.5, delay: 0.05, ease }}
             >
                 <nav className="container-wide" style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     {/* Logo */}
@@ -87,7 +82,6 @@ export default function Navbar() {
                             width={34}
                             height={34}
                             priority
-                            style={{ filter: "drop-shadow(0 0 8px rgba(0,170,255,0.4))" }}
                         />
                         <span className="font-display" style={{ fontWeight: 700, fontSize: "1.15rem", color: "var(--text)", letterSpacing: "-0.03em" }}>
                             autometa<span style={{ color: "var(--accent)", marginLeft: 4 }}>ai</span>
@@ -169,6 +163,6 @@ export default function Navbar() {
                     </motion.div>
                 </nav>
             </motion.header>
-        </>
+        </div>
     );
 }

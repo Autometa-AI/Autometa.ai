@@ -157,7 +157,7 @@ export default function ServicesSection() {
                         viewport={vp}
                         transition={{ duration: 0.7, delay: 0.1, ease }}
                     >
-                        Everything You Need to <span className="gradient-text">Scale Your Agency</span>
+                        Everything You Need to <span className="gradient-text">Scale Your Real Estate Agency</span>
                     </motion.h2>
                     <motion.p
                         style={{ fontSize: "1.15rem", color: "var(--text-muted)", lineHeight: 1.65 }}
@@ -166,7 +166,7 @@ export default function ServicesSection() {
                         viewport={vp}
                         transition={{ duration: 0.6, delay: 0.2, ease }}
                     >
-                        Three categories of services — built together or independently — that turn your agency into a high-performance machine.
+                        Three categories of services — built together or independently — that turn your real estate agency into a high-performance machine.
                     </motion.p>
                 </div>
 

@@ -61,7 +61,7 @@ export default function LeadCapturePopup() {
         padding: "0.8rem 1rem",
         fontSize: "0.95rem",
         fontFamily: "'Inter', sans-serif",
-        background: "rgba(255,255,255,0.04)",
+        background: "var(--surface-muted)",
         border: "1px solid var(--border)",
         borderRadius: 10,
         color: "var(--text)",
@@ -92,7 +92,7 @@ export default function LeadCapturePopup() {
                         style={{
                             position: "fixed",
                             inset: 0,
-                            background: "rgba(0,0,0,0.65)",
+                            background: "rgba(10,14,24,0.45)",
                             backdropFilter: "blur(6px)",
                             WebkitBackdropFilter: "blur(6px)",
                             zIndex: 9998,
@@ -116,7 +116,7 @@ export default function LeadCapturePopup() {
                             border: "1px solid var(--border)",
                             borderRadius: 20,
                             overflow: "hidden",
-                            boxShadow: "0 32px 80px rgba(0,0,0,0.5), 0 0 60px rgba(0,207,255,0.08)",
+                            boxShadow: "0 32px 80px rgba(10,14,24,0.18), 0 0 60px rgba(0,102,255,0.10)",
                         }}
                     >
                         {/* Top accent bar */}
@@ -138,7 +138,7 @@ export default function LeadCapturePopup() {
                                 width: 32,
                                 height: 32,
                                 borderRadius: "50%",
-                                background: "rgba(255,255,255,0.05)",
+                                background: "var(--surface-muted)",
                                 border: "1px solid var(--border)",
                                 color: "var(--text-muted)",
                                 display: "flex",
